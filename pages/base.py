@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from time import sleep
 
 class BasePage():
     # TODO: decide weather or not to use cookies for auth
@@ -25,7 +24,6 @@ class BasePage():
             for char in self.password:
                 password_box.send_keys(char)
         login_button.click()
-        sleep(2)
 
     def close(self):
         self.driver.close()
