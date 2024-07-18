@@ -100,7 +100,7 @@ void_shipment = void_shipment_el.get_attribute('value')
 print(f'void shipping: {void_shipment}')
 
 # get service type
-service_type_el = driver.find_element(By.ID, 'canpost_service_type')
+service_type_el = driver.find_element(By.ID, 'canpost_service_type_1')
 service_type = service_type_el.get_attribute('value')
 print(f'Service type: {service_type}')
 
