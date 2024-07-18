@@ -1,6 +1,5 @@
 from base import BasePage
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.support import expected_conditions as EC
 
 
 class ShippingMethods(BasePage):
@@ -155,34 +154,3 @@ class ShippingMethods(BasePage):
         excluded_attribs = excluded_attributes_spans.text.split('\n')
         print(excluded_attribs)
         return excluded_attribs
-
-test = ShippingMethods()
-test.login()
-test.navigate('https://staging.odoo.printgeek.ca/web#id=4&cids=1&menu_id=356&action=609&model=delivery.carrier&view_type=form')
-test.get_shipping_provider()
-test.get_name()
-test.get_related_company()
-test.get_company_names()
-test.get_countries()
-test.get_states()
-test.get_zip_prefix()
-
-test.navigate_tab_extra()
-
-test.get_default_weight()
-test.get_shipping_uom()
-test.get_packaging()
-test.get_void_ship()
-test.get_service_type()
-test.get_service_option()
-test.get_customer_type()
-test.get_customer_number()
-test.get_contract_id()
-test.get_promo_code()
-test.get_payment_method()
-test.get_mailed_on_behalf()
-
-test.navigate_tab_product_attrib()
-
-test.get_included_attribs()
-test.get_excluded_attribs()
