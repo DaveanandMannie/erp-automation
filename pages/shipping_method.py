@@ -23,15 +23,11 @@ class ShippingMethods(BasePage):
 
     def get_shipping_provider(self) -> str:
         provider_elem = self.driver.find_element(By.ID, 'delivery_type')
-        if not provider_elem:
-            raise Exception('Element error: Not Found')
         provider: str = provider_elem.get_attribute('value').replace('"', '')  #type: ignore
         return provider
 
     def get_name(self) -> str:
         name_elem = self.driver.find_element(By.ID, 'name')
-        if not name_elem:
-            raise Exception('Element error: Not Found')
         name: str =  name_elem.get_attribute('value')  #type: ignore
         print(name)
         return name
