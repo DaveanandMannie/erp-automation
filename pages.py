@@ -52,6 +52,11 @@ class ShippingMethods(BasePage):
         self.driver.get(url)
         return
 
+    def navigate_tab_destination(self):
+        tab_elem = self.driver.find_element(By.LINK_TEXT, 'Destination Availability')
+        tab_elem.click()
+        return
+
     def navigate_tab_extra(self):
         tab_elem = self.driver.find_element(By.LINK_TEXT, 'Extra')
         tab_elem.click()
