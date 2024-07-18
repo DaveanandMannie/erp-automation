@@ -1,4 +1,4 @@
 .env
 .idea/
-pages/__pycache__/
+__pycache__/
 test_json/
