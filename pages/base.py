@@ -11,8 +11,22 @@ class BasePage():
         self.email = os.getenv('EMAIL')
         self.password = os.getenv('PASS')
 
-    def login(self):
+    def login_staging(self):
         self.driver.get('https://staging.odoo.printgeek.ca')
+        email_box = self.driver.find_element(By.ID, 'login')
+        password_box = self.driver.find_element(By.ID, 'password')
+        login_button = self.driver.find_element(By.XPATH, "//button[@type='submit' and contains(text(), 'Log in')]")
+
+        if self.email:
+            for char in self.email:
+                email_box.send_keys(char)
+        if self.password:
+            for char in self.password:
+                password_box.send_keys(char)
+        login_button.click()
+
+    def login_prod(self):
+        self.driver.get('https://odoo.printgeek.ca')
         email_box = self.driver.find_element(By.ID, 'login')
         password_box = self.driver.find_element(By.ID, 'password')
         login_button = self.driver.find_element(By.XPATH, "//button[@type='submit' and contains(text(), 'Log in')]")
