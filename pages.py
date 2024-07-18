@@ -3,7 +3,8 @@ from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-class BasePage():
+
+class BasePage:
     # TODO: decide weather or not to use cookies for auth
     def __init__(self):
         load_dotenv()
@@ -68,20 +69,20 @@ class ShippingMethods(BasePage):
 
     def get_shipping_provider(self) -> str:
         provider_elem = self.driver.find_element(By.ID, 'delivery_type')
-        provider: str = provider_elem.get_attribute('value').replace('"', '')  #type: ignore
+        provider: str = provider_elem.get_attribute('value').replace('"', '')  # type: ignore
         return provider
 
     def get_name(self) -> str:
         name_elem = self.driver.find_element(By.ID, 'name')
-        name: str =  name_elem.get_attribute('value')  #type: ignore
+        name: str = name_elem.get_attribute('value')  # type: ignore
         return name
 
-    # TODO: decide weather to turn this into a bool in order to dictect following list validation
-    def get_related_company(self) ->  str:
+    # TODO: decide weather to turn this into a bool in order to detect following list validation
+    def get_related_company(self) -> str:
         related_elem = self.driver.find_element(By.ID, 'related_to_client_company')
         if not related_elem:
             raise Exception('Element error: Not Found')
-        is_on: str = related_elem.get_attribute('value')  #type: ignore
+        is_on: str = related_elem.get_attribute('value')  # type: ignore
         return is_on
 
     def get_company_names(self) -> list:
@@ -112,71 +113,71 @@ class ShippingMethods(BasePage):
 
     def get_default_weight(self) -> str:
         def_weight_elem = self.driver.find_element(By.ID, 'default_product_weight')
-        def_weight: str = def_weight_elem.get_attribute('value')  #type: ignore
+        def_weight: str = def_weight_elem.get_attribute('value')  # type: ignore
         return def_weight
 
     def get_shipping_uom(self) -> str:
         uom_elem = self.driver.find_element(By.ID, 'uom_id')
-        ship_uom: str = uom_elem.get_attribute('value')  #type: ignore
+        ship_uom: str = uom_elem.get_attribute('value')  # type: ignore
         return ship_uom
 
     def get_packaging(self) -> str:
         package_elem = self.driver.find_element(By.ID, 'packaging_id')
-        package: str = package_elem.get_attribute('value')  #type: ignore
-        return(package)
+        package: str = package_elem.get_attribute('value')  # type: ignore
+        return package
 
     def get_void_ship(self) -> str:
         void_elem = self.driver.find_element(By.ID, 'void_shipment')
-        void: str = void_elem.get_attribute('value')  #type: ignore
+        void: str = void_elem.get_attribute('value')  # type: ignore
         return void
 
     def get_service_type(self) -> str:
         service_elem = self.driver.find_element(By.ID, 'canpost_service_type_1')
-        service: str = service_elem.get_attribute('value')  #type: ignore
+        service: str = service_elem.get_attribute('value')  # type: ignore
         return service
 
     def get_service_option(self) -> str:
         option_elem = self.driver.find_element(By.ID, 'canpost_option_type')
-        option: str = option_elem.get_attribute('value')  #type: ignore
+        option: str = option_elem.get_attribute('value')  # type: ignore
         return option
 
     def get_customer_type(self) -> str:
         customer_type_elem = self.driver.find_element(By.ID, 'canpost_quote_type')
-        customer_type: str = customer_type_elem.get_attribute('value').replace('"', '')  #type: ignore
+        customer_type: str = customer_type_elem.get_attribute('value').replace('"', '')  # type: ignore
         return customer_type
 
-    #TODO: handle type int vs str
+    # TODO: handle type int vs str
     def get_customer_number(self) -> str:
         customer_number_elem = self.driver.find_element(By.ID, 'canpost_customer_number')
-        customer_number: str = customer_number_elem.get_attribute('value')  #type: ignore
+        customer_number: str = customer_number_elem.get_attribute('value')  # type: ignore
         return customer_number
 
     def get_contract_id(self) -> str:
         contract_elem = self.driver.find_element(By.ID, 'canpost_contract_id')
-        contract: str = contract_elem.get_attribute('value')  #type: ignore
+        contract: str = contract_elem.get_attribute('value')  # type: ignore
         return contract
 
     def get_promo_code(self) -> str:
         promo_elem = self.driver.find_element(By.ID, 'canpost_promo_code')
-        promo: str = promo_elem.get_attribute('value')  #type: # pyright: ignore
+        promo: str = promo_elem.get_attribute('value')  # type: # pyright: ignore
         return promo
 
     def get_payment_method(self) -> str:
         payment_method_elem = self.driver.find_element(By.ID, 'canpost_method_of_payment')
-        payment_method: str = payment_method_elem.get_attribute('value')  #type: ignore
+        payment_method: str = payment_method_elem.get_attribute('value')  # type: ignore
         return payment_method
 
     def get_mailed_on_behalf(self) -> str:
         behalf_elem = self.driver.find_element(By.ID, 'canpost_mailed_on_behalf_of')
-        behalf: str = behalf_elem.get_attribute('value')  #type: ignore
-        return(behalf)
+        behalf: str = behalf_elem.get_attribute('value')  # type: ignore
+        return behalf
 
     def get_included_attribs(self) -> list:
-        included_attributes_spans = self.driver.find_element(By.NAME,'included_attribute_ids')
-        included_attribs: list  = included_attributes_spans.text.split('\n')
-        return(included_attribs)
+        included_attributes_spans = self.driver.find_element(By.NAME, 'included_attribute_ids')
+        included_attribs: list = included_attributes_spans.text.split('\n')
+        return included_attribs
 
     def get_excluded_attribs(self) -> list:
-        excluded_attributes_spans = self.driver.find_element(By.NAME,'excluded_attribute_ids')
+        excluded_attributes_spans = self.driver.find_element(By.NAME, 'excluded_attribute_ids')
         excluded_attribs = excluded_attributes_spans.text.split('\n')
         return excluded_attribs
