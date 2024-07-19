@@ -9,7 +9,7 @@ class TestShippingMethods:
     @pytest.fixture(scope="class")
     def page(self):
         ''' Selenium driver with scraper '''
-        page: ShippingMethods = ShippingMethods('--kiosk')
+        page: ShippingMethods = ShippingMethods('--headless')
         page.login_staging()
         return page
 
