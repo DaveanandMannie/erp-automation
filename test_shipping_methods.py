@@ -9,7 +9,7 @@ class TestShippingMethods:
     @pytest.fixture(scope="class")
     def page(self):
         ''' Selenium driver with scraper '''
-        page: ShippingMethods = ShippingMethods('--kiosk', 'window-size=1200x600')
+        page: ShippingMethods = ShippingMethods('--kiosk')
         page.login_staging()
         return page
     # TODO: dynamically add staging vs prod bool
