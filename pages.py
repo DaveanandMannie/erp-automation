@@ -2,13 +2,16 @@ import os
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.chrome.options import Options
 
 class BasePage:
     # TODO: decide weather or not to use cookies for auth
-    def __init__(self):
+    def __init__(self, *args):
         load_dotenv()
-        self.driver = webdriver.Chrome()
+        self.chrom_opts = Options()
+        for arg in args:
+            self.chrom_opts.add_argument(arg)
+        self.driver = webdriver.Chrome(options=self.chrom_opts)
         self.email = os.getenv('EMAIL')
         self.password = os.getenv('PASS')
 
@@ -45,8 +48,8 @@ class BasePage:
 
 
 class ShippingMethods(BasePage):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args):
+        super().__init__(*args)
         self.driver.implicitly_wait(5)
 
     def navigate(self, url: str):

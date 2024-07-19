@@ -9,12 +9,12 @@ class TestShippingMethods:
     @pytest.fixture(scope="class")
     def page(self):
         ''' Selenium driver with scraper '''
-        page: ShippingMethods = ShippingMethods()
+        page: ShippingMethods = ShippingMethods('--kiosk', 'window-size=1200x600')
         page.login_staging()
         return page
     # TODO: dynamically add staging vs prod bool
     @pytest.fixture(params=glob('testcase_json/*.json'))
-    def data(self, request, page):
+    def data(self, request, page: ShippingMethods):
         ''' Paramitize for multiple json test cases '''
         with open(request.param, 'r') as file:
             data = json.load(file)
