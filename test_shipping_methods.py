@@ -23,43 +23,50 @@ class TestShippingMethods:
 
 
     def test_name(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_destination()
         correct_name: str = data['shipping_method_name']
         name = page.get_name()
         assert name == correct_name, 'The name of the shipping method is incorrect'
 
     def test_provider(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_destination()
         correct_provider: str = data['provider']
         provider = page.get_shipping_provider()
         assert provider == correct_provider, 'The shipping provider is incorrect'
 
 
     def test_related_company(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_destination()
         correct_state: str = data['related_company_switch']
         state: str = page.get_related_company()
         assert state == correct_state, 'Related to companies is not on'
 
 
     def test_company_names(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_destination()
         correct_list: list = data['related_company_list']
         companies: list = page.get_company_names()
         assert companies == correct_list, 'The list of companies is not equal configured correctly'
 
     def test_countries(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_destination()
         correct_countries: list = data['country_list']
         countries: list = page.get_countries()
         assert countries ==  correct_countries, 'The list of countries is not configured correctly'
 
     def test_states(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_destination()
         correct_states: list = data['state_list']
         states: list = page.get_states()
         assert states == correct_states, 'The list of states is not configured correctly'
 
-
     def test_zip_prefix(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_destination()
         correct_prefix: list = data['zip_prefix_list']
         prefix: list = page.get_zip_prefix()
         assert prefix == correct_prefix, 'The zip prefix is not configured correctly'
 
+    # ==================Extra Tab================== #
     def test_default_weight(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_default: str = data['default_weight']
@@ -132,6 +139,7 @@ class TestShippingMethods:
         behalf: str = page.get_mailed_on_behalf()
         assert behalf == correct_behalf, 'Mailed on behalf of is not configured correctly'
 
+    # ==================Product Attrib Tab================== #
     def test_included_attrib(self, page: ShippingMethods, data: dict):
         page.navigate_tab_product_attrib()
         correct_include: list = data['included_attributes']
