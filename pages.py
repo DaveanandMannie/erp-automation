@@ -47,7 +47,7 @@ class BasePage:
 class ShippingMethods(BasePage):
     def __init__(self):
         super().__init__()
-        self.driver.implicitly_wait(3)
+        self.driver.implicitly_wait(5)
 
     def navigate(self, url: str):
         self.driver.get(url)
