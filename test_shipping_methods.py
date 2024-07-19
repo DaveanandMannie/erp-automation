@@ -8,10 +8,11 @@ from glob import glob
 class TestShippingMethods:
     @pytest.fixture(scope="class")
     def page(self):
+        ''' Selenium driver with scraper '''
         page: ShippingMethods = ShippingMethods()
         page.login_staging()
         return page
-
+    # TODO: dynamically add staging vs prod bool
     @pytest.fixture(params=glob('testcase_json/*.json'))
     def data(self, request, page):
         ''' Paramitize for multiple json test cases '''
