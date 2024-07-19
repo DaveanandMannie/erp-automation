@@ -1,6 +1,6 @@
 import pytest
 import json
-from pages import ShippingMethods
+from pages.pages import ShippingMethods
 from time import sleep
 from glob import glob
 
@@ -12,6 +12,7 @@ class TestShippingMethods:
         page: ShippingMethods = ShippingMethods('--kiosk')
         page.login_staging()
         return page
+
     # TODO: dynamically add staging vs prod bool
     @pytest.fixture(params=glob('testcase_json/*.json'))
     def data(self, request, page: ShippingMethods):
