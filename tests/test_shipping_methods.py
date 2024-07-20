@@ -15,7 +15,7 @@ class TestShippingMethods:
         return page
 
     # TODO: dynamically add staging vs prod bool
-    @pytest.fixture(params=glob('testcase_json/*.json'))
+    @pytest.fixture(scope='class', params=glob('testcase_json/*.json'))
     def data(self, request, page: ShippingMethods):
         """ Paramitize for multiple json test cases """
         with open(request.param, 'r') as file:
@@ -24,13 +24,8 @@ class TestShippingMethods:
             sleep(0.5)
             return data
 
-    @staticmethod
-    def wait(sec: float = 0.3):
-        sleep(sec)
-
     def test_name(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
-        TestShippingMethods.wait()
         correct_name: str = data['shipping_method_name']
         name = page.get_name()
         assert name == correct_name, (
@@ -38,9 +33,7 @@ class TestShippingMethods:
         )
 
     def test_provider(self, page: ShippingMethods, data: dict):
-        TestShippingMethods.wait()
         page.navigate_tab_destination()
-        TestShippingMethods.wait()
         correct_provider: str = data['provider']
         provider = page.get_shipping_provider()
         assert provider == correct_provider, (
@@ -48,16 +41,13 @@ class TestShippingMethods:
         )
 
     def test_related_company(self, page: ShippingMethods, data: dict):
-        TestShippingMethods.wait(0.1)
         page.navigate_tab_destination()
-        TestShippingMethods.wait(0.1)
         correct_state: str = data['related_company_switch']
         state: str = page.get_related_company()
         assert state == correct_state, 'Related to companies is not on'
 
     def test_company_names(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
-        TestShippingMethods.wait()
         correct_list: list = data['related_company_list']
         companies: list = page.get_company_names()
         assert companies == correct_list, (
@@ -67,7 +57,6 @@ class TestShippingMethods:
     def test_countries(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
         correct_countries: list = data['country_list']
-        TestShippingMethods.wait()
         countries: list = page.get_countries()
         assert countries == correct_countries, (
                 'The list of countries is not configured correctly'
@@ -75,7 +64,6 @@ class TestShippingMethods:
 
     def test_states(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
-        TestShippingMethods.wait()
         correct_states: list = data['state_list']
         states: list = page.get_states()
         assert states == correct_states, (
@@ -84,7 +72,6 @@ class TestShippingMethods:
 
     def test_zip_prefix(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
-        TestShippingMethods.wait()
         correct_prefix: list = data['zip_prefix_list']
         prefix: list = page.get_zip_prefix()
         assert prefix == correct_prefix, (
@@ -94,7 +81,6 @@ class TestShippingMethods:
     # ==================Extra Tab================== #
     def test_default_weight(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_default: str = data['default_weight']
         default: str = page.get_default_weight()
         assert default == correct_default, (
@@ -103,7 +89,6 @@ class TestShippingMethods:
 
     def test_shipping_uom(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_uom: str = data['shipping_uom']
         uom: str = page.get_shipping_uom()
         assert uom == correct_uom, (
@@ -112,7 +97,6 @@ class TestShippingMethods:
 
     def test_packaging(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_package: str = data['packaging']
         package: str = page.get_packaging()
         assert package == correct_package, (
@@ -121,14 +105,12 @@ class TestShippingMethods:
 
     def test_void_ship(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_state: str = data['void_shipment_switch']
         state: str = page.get_void_ship()
         assert state == correct_state, 'Void shipment is not on'
 
     def test_service_type(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_service: str = data['service_type']
         service: str = page.get_service_type()
         assert service == correct_service, (
@@ -140,7 +122,6 @@ class TestShippingMethods:
             assert True
             return
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_option: str = data['desired_option']
         option: str = page.get_service_option()
         assert option == correct_option, (
@@ -152,7 +133,6 @@ class TestShippingMethods:
             assert True
             return
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_type: str = data['customer_type']
         c_type: str = page.get_customer_type()
         assert c_type == correct_type, (
@@ -164,7 +144,6 @@ class TestShippingMethods:
             assert True
             return
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_num: str = data['customer_number']
         num: str = page.get_customer_number()
         assert num == correct_num, (
@@ -176,7 +155,6 @@ class TestShippingMethods:
             assert True
             return
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_contract: str = data['contract_id']
         contract: str = page.get_contract_id()
         assert contract == correct_contract, (
@@ -188,7 +166,6 @@ class TestShippingMethods:
             assert True
             return
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_promo: str = data['promo_code']
         promo: str = page.get_promo_code()
         assert promo == correct_promo, 'Promo code is not configured correctly'
@@ -198,7 +175,6 @@ class TestShippingMethods:
             assert True
             return
         page.navigate_tab_extra()
-        TestShippingMethods.wait()
         correct_method: str = data['method_of_payments']
         method: str = page.get_payment_method()
         assert method == correct_method, (
@@ -219,7 +195,6 @@ class TestShippingMethods:
     # ==================Product Attrib Tab================== #
     def test_included_attrib(self, page: ShippingMethods, data: dict):
         page.navigate_tab_product_attrib()
-        TestShippingMethods.wait()
         correct_include: list = data['included_attributes']
         include: list = page.get_included_attribs()
         assert include == correct_include, (
@@ -228,7 +203,6 @@ class TestShippingMethods:
 
     def test_excluded_attrib(self, page: ShippingMethods, data: dict):
         page.navigate_tab_product_attrib()
-        TestShippingMethods.wait()
         correct_exclude: list = data['included_attributes']
         exclude: list = page.get_included_attribs()
         assert exclude == correct_exclude, (
