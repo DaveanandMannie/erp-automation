@@ -15,7 +15,10 @@ class TestShippingMethods:
         return page
 
     # TODO: dynamically add staging vs prod bool
-    @pytest.fixture(scope='class', params=glob('testcase_json/*.json'))
+    @pytest.fixture(
+        scope='class',
+        params=glob('testcases_json/apparel_shipping_methods/*.json')
+    )
     def data(self, request, page: ShippingMethods):
         """ Paramitize for multiple json test cases """
         with open(request.param, 'r') as file:
