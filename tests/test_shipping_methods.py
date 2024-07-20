@@ -25,8 +25,8 @@ class TestShippingMethods:
             return data
 
     @staticmethod
-    def wait():
-        sleep(0.3)
+    def wait(sec: float = 0.3):
+        sleep(sec)
 
     def test_name(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
@@ -38,6 +38,7 @@ class TestShippingMethods:
         )
 
     def test_provider(self, page: ShippingMethods, data: dict):
+        TestShippingMethods.wait()
         page.navigate_tab_destination()
         TestShippingMethods.wait()
         correct_provider: str = data['provider']
@@ -47,8 +48,9 @@ class TestShippingMethods:
         )
 
     def test_related_company(self, page: ShippingMethods, data: dict):
+        TestShippingMethods.wait(0.1)
         page.navigate_tab_destination()
-        TestShippingMethods.wait()
+        TestShippingMethods.wait(0.1)
         correct_state: str = data['related_company_switch']
         state: str = page.get_related_company()
         assert state == correct_state, 'Related to companies is not on'
