@@ -82,7 +82,7 @@ class ShippingMethods(BasePage):
     def get_shipping_provider(self) -> str:
         provider_elem = self.driver.find_element(By.ID, 'delivery_type')
         provider: str = provider_elem.get_attribute('value')  # type: ignore
-        provider.replace('"', '')
+        provider = provider.replace('"', '')
         return provider
 
     def get_name(self) -> str:
@@ -164,7 +164,7 @@ class ShippingMethods(BasePage):
             By.ID, 'canpost_quote_type'
         )
         customer_type: str | None = customer_type_elem.get_attribute('value')
-        customer_type.replace('"', '')  # type: ignore
+        customer_type = customer_type.replace('"', '')  # type: ignore
         return customer_type  # type: ignore
 
     # TODO: handle type int vs str
