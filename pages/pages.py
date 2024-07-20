@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
+
 class BasePage:
     # TODO: decide weather or not to use cookies for auth
     def __init__(self, *args):
@@ -19,7 +20,9 @@ class BasePage:
         self.driver.get('https://staging.odoo.printgeek.ca')
         email_box = self.driver.find_element(By.ID, 'login')
         password_box = self.driver.find_element(By.ID, 'password')
-        login_button = self.driver.find_element(By.XPATH, "//button[@type='submit' and contains(text(), 'Log in')]")
+        login_button = self.driver.find_element(
+            By.XPATH, "//button[@type='submit' and contains(text(), 'Log in')]"
+        )
 
         if self.email:
             for char in self.email:
@@ -33,7 +36,9 @@ class BasePage:
         self.driver.get('https://odoo.printgeek.ca')
         email_box = self.driver.find_element(By.ID, 'login')
         password_box = self.driver.find_element(By.ID, 'password')
-        login_button = self.driver.find_element(By.XPATH, "//button[@type='submit' and contains(text(), 'Log in')]")
+        login_button = self.driver.find_element(
+            By.XPATH, "//button[@type='submit' and contains(text(), 'Log in')]"
+        )
 
         if self.email:
             for char in self.email:
@@ -57,7 +62,9 @@ class ShippingMethods(BasePage):
         return
 
     def navigate_tab_destination(self):
-        tab_elem = self.driver.find_element(By.LINK_TEXT, 'Destination Availability')
+        tab_elem = self.driver.find_element(
+            By.LINK_TEXT, 'Destination Availability'
+        )
         tab_elem.click()
         return
 
@@ -67,12 +74,15 @@ class ShippingMethods(BasePage):
         return
 
     def navigate_tab_product_attrib(self):
-        tab_elem = self.driver.find_element(By.LINK_TEXT, 'Product Attribute Configuration')
+        tab_elem = self.driver.find_element(
+            By.LINK_TEXT, 'Product Attribute Configuration'
+        )
         tab_elem.click()
 
     def get_shipping_provider(self) -> str:
         provider_elem = self.driver.find_element(By.ID, 'delivery_type')
-        provider: str = provider_elem.get_attribute('value').replace('"', '')  # type: ignore
+        provider: str = provider_elem.get_attribute('value')  # type: ignore
+        provider.replace('"', '')
         return provider
 
     def get_name(self) -> str:
@@ -80,9 +90,10 @@ class ShippingMethods(BasePage):
         name: str = name_elem.get_attribute('value')  # type: ignore
         return name
 
-    # TODO: decide weather to turn this into a bool in order to detect following list validation
     def get_related_company(self) -> str:
-        related_elem = self.driver.find_element(By.ID, 'related_to_client_company')
+        related_elem = self.driver.find_element(
+            By.ID, 'related_to_client_company'
+        )
         if not related_elem:
             raise Exception('Element error: Not Found')
         is_on: str = related_elem.get_attribute('value')  # type: ignore
@@ -115,8 +126,10 @@ class ShippingMethods(BasePage):
         return prefix_list
 
     def get_default_weight(self) -> str:
-        def_weight_elem = self.driver.find_element(By.ID, 'default_product_weight')
-        def_weight: str = def_weight_elem.get_attribute('value')  # type: ignore
+        def_weight_elem = self.driver.find_element(
+            By.ID, 'default_product_weight'
+        )
+        def_weight: str = def_weight_elem.get_attribute('value')  # type:ignore
         return def_weight
 
     def get_shipping_uom(self) -> str:
@@ -135,7 +148,9 @@ class ShippingMethods(BasePage):
         return void
 
     def get_service_type(self) -> str:
-        service_elem = self.driver.find_element(By.ID, 'canpost_service_type_1')
+        service_elem = self.driver.find_element(
+            By.ID, 'canpost_service_type_1'
+        )
         service: str = service_elem.get_attribute('value')  # type: ignore
         return service
 
@@ -145,14 +160,21 @@ class ShippingMethods(BasePage):
         return option
 
     def get_customer_type(self) -> str:
-        customer_type_elem = self.driver.find_element(By.ID, 'canpost_quote_type')
-        customer_type: str = customer_type_elem.get_attribute('value').replace('"', '')  # type: ignore
-        return customer_type
+        customer_type_elem = self.driver.find_element(
+            By.ID, 'canpost_quote_type'
+        )
+        customer_type: str | None = customer_type_elem.get_attribute('value')
+        customer_type.replace('"', '')  # type: ignore
+        return customer_type  # type: ignore
 
     # TODO: handle type int vs str
     def get_customer_number(self) -> str:
-        customer_number_elem = self.driver.find_element(By.ID, 'canpost_customer_number')
-        customer_number: str = customer_number_elem.get_attribute('value')  # type: ignore
+        customer_number_elem = self.driver.find_element(
+            By.ID, 'canpost_customer_number'
+        )
+        customer_number: str = (
+                customer_number_elem.get_attribute('value')  # type: ignore
+        )
         return customer_number
 
     def get_contract_id(self) -> str:
@@ -162,25 +184,33 @@ class ShippingMethods(BasePage):
 
     def get_promo_code(self) -> str:
         promo_elem = self.driver.find_element(By.ID, 'canpost_promo_code')
-        promo: str = promo_elem.get_attribute('value')  # type: # pyright: ignore
+        promo: str = promo_elem.get_attribute('value')  # type: ignore
         return promo
 
     def get_payment_method(self) -> str:
-        payment_method_elem = self.driver.find_element(By.ID, 'canpost_method_of_payment')
-        payment_method: str = payment_method_elem.get_attribute('value')  # type: ignore
-        return payment_method
+        payment_method_elem = self.driver.find_element(
+            By.ID, 'canpost_method_of_payment'
+        )
+        payment_method: str | None = payment_method_elem.get_attribute('value')
+        return payment_method  # type: ignore
 
     def get_mailed_on_behalf(self) -> str:
-        behalf_elem = self.driver.find_element(By.ID, 'canpost_mailed_on_behalf_of')
+        behalf_elem = self.driver.find_element(
+            By.ID, 'canpost_mailed_on_behalf_of'
+        )
         behalf: str = behalf_elem.get_attribute('value')  # type: ignore
         return behalf
 
     def get_included_attribs(self) -> list:
-        included_attributes_spans = self.driver.find_element(By.NAME, 'included_attribute_ids')
+        included_attributes_spans = self.driver.find_element(
+            By.NAME, 'included_attribute_ids'
+        )
         included_attribs: list = included_attributes_spans.text.split('\n')
         return included_attribs
 
     def get_excluded_attribs(self) -> list:
-        excluded_attributes_spans = self.driver.find_element(By.NAME, 'excluded_attribute_ids')
+        excluded_attributes_spans = self.driver.find_element(
+            By.NAME, 'excluded_attribute_ids'
+        )
         excluded_attribs = excluded_attributes_spans.text.split('\n')
         return excluded_attribs
