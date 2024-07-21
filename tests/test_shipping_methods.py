@@ -66,7 +66,9 @@ class TestShippingMethods:
     def test_delivery_product(self, page: ShippingMethods, data: dict):
         correct_product: str = data['delivery_product']
         product: str = page.get_delivery_product()
-        assert product == correct_product, ('Delivery Product is not configured correctly')
+        assert product == correct_product, (
+            'Delivery Product is not configured correctly'
+        )
 
     def test_countries(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
