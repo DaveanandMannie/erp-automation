@@ -1,17 +1,20 @@
 import pytest
 import json
-from pages.pages import ShippingMethods
+from pages.shipping_methods import ShippingMethods
 from time import sleep
 from glob import glob
 
 
-# TODO: change sleep here to EC driver wait in the class ShippingMethods
 class TestShippingMethods:
     @pytest.fixture(scope='class')
-    def page(self):
+    def page(self, request):
         ''' Selenium driver with scraper '''
-        page: ShippingMethods = ShippingMethods('--headless')
-        page.login_staging()
+        environment: str = request.config.getoption('--environment')
+        page: ShippingMethods = ShippingMethods()
+        if environment == 'staging':
+            page.login_staging()
+        if environment == 'production':
+            page.login_prod()
         return page
 
     # TODO: dynamically add staging vs prod bool
@@ -19,11 +22,14 @@ class TestShippingMethods:
         scope='class',
         params=glob('testcases_json/apparel_shipping_methods/*.json')
     )
-    def data(self, request, page: ShippingMethods):
+    def data(self, request, page: ShippingMethods, environment: str):
         """ Paramitize for multiple json test cases """
         with open(request.param, 'r') as file:
             data = json.load(file)
-            page.navigate(data['staging_url'])
+            if environment == 'staging':
+                page.navigate(data['staging_url'])
+            if environment == 'production':
+                page.navigate(data['production_url'])
             sleep(0.5)
             return data
 
