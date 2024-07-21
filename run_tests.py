@@ -21,9 +21,10 @@ def main():
     if args.environment:
         pytest_args.append(f'--environment={args.environment}')
 
+    # this is not best prac
+
     for _ in range(args.repeat):
         pytest.main(pytest_args)
-        print(args.environment)
 
 
 if __name__ == '__main__':

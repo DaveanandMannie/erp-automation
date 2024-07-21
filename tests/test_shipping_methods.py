@@ -10,7 +10,7 @@ class TestShippingMethods:
     def page(self, request):
         ''' Selenium driver with scraper '''
         environment: str = request.config.getoption('--environment')
-        page: ShippingMethods = ShippingMethods()
+        page: ShippingMethods = ShippingMethods("--headless")
         if environment == 'staging':
             page.login_staging()
         if environment == 'production':
@@ -62,6 +62,11 @@ class TestShippingMethods:
         assert companies == correct_list, (
             'The list of companies is not equal configured correctly'
         )
+
+    def test_delivery_product(self, page: ShippingMethods, data: dict):
+        correct_product: str = data['delivery_product']
+        product: str = page.get_delivery_product()
+        assert product == correct_product, ('Delivery Product is not configured correctly')
 
     def test_countries(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()

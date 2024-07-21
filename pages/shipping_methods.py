@@ -60,6 +60,11 @@ class ShippingMethods(BasePage):
                     company_names.append(company_name)
         return company_names
 
+    def get_delivery_product(self) -> str:
+        delivery_product = self.driver.find_element(By.ID, 'product_id')
+        delivery_product_name: str = delivery_product.get_attribute('value')  #type: ignore
+        return delivery_product_name
+
     def get_countries(self) -> list:
         country_badges = self.driver.find_elements(By.NAME, 'country_ids')
         country_list: list = country_badges[0].text.split('\n')
