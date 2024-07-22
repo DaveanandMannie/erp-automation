@@ -19,6 +19,20 @@ class ShippingMethods(BasePage):
         tab_elem.click()
         return
 
+    def navigate_tab_canpost_credentials(self):
+        tab_elem = self.driver.find_element(
+            By.LINK_TEXT, 'Canada Post Credentials'
+        )
+        tab_elem.click()
+        return
+
+    def navigate_tab_pb_credentials(self):
+        tab_elem = self.driver.find_element(
+            By.LINK_TEXT, 'Pitney Bowes Credentials'
+        )
+        tab_elem.click()
+        return
+
     def navigate_tab_product_attrib(self):
         tab_elem = self.driver.find_element(
             By.LINK_TEXT, 'Product Attribute Configuration'
@@ -78,6 +92,58 @@ class ShippingMethods(BasePage):
         zip_badges = self.driver.find_elements(By.NAME, 'zip_prefix_ids')
         prefix_list: list = zip_badges[0].text.split('\n')
         return prefix_list
+
+# =============== Credential =============== #
+    def get_canpost_dev_username(self) -> str:
+        user_elem = self.driver.find_element(By.ID, 'canpost_test_username')
+        user: str = user_elem.get_attribute('value')  # type: ignore
+        return user
+
+    def get_canpost_dev_password(self) -> str:
+        password_elem = self.driver.find_element(
+            By.ID, 'canpost_test_password'
+        )
+        password: str = password_elem.get_attribute('value')  # type: ignore
+        return password
+
+    def get_canpost_prod_username(self) -> str:
+        user_elem = self.driver.find_element(
+            By.ID, 'canpost_production_username'
+        )
+        user: str = user_elem.get_attribute('value')  # type: ignore
+        return user
+
+    def get_canpost_prod_password(self) -> str:
+        password_elem = self.driver.find_element(
+            By.ID, 'canpost_production_password'
+        )
+        password: str = password_elem.get_attribute('value')  # type: ignore
+        return password
+
+    def get_pb_dev_url(self) -> str:
+        user_elem = self.driver.find_element(By.ID, 'url')
+        username: str = user_elem.get_attribute('value')  # type: ignore
+        return username
+
+    def get_pb_dev_api_key(self) -> str:
+        key_elem = self.driver.find_element(By.ID, 'api_key')
+        key: str = key_elem.get_attribute('value')  # type: ignore
+        return key
+
+    def get_pb_dev_api_secret(self) -> str:
+        secret_elem = self.driver.find_element(By.ID, 'api_secret')
+        secret: str = secret_elem.get_attribute('value')  # type: ignore
+        return secret
+
+    def get_pb_dev_shipper_id(self) -> str:
+        id_elem = self.driver.find_element(By.ID, 'shipper_id')
+        id: str = id_elem.get_attribute('value')  # type: ignore
+        return id
+
+    def get_pb_dev_token(self) -> str:
+        token_elem = self.driver.find_element(By.ID, 'shipper_id')
+        token: str = token_elem.get_attribute('value')  # type: ignore
+        return token
 
 # =============== Extra tab =============== #
     def get_default_weight(self) -> str:

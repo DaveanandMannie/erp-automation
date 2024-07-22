@@ -17,7 +17,7 @@ def main():
         help='Choose environemnt (default = staging)'
     )
     args = parser.parse_args()
-    pytest_args: list[str] = ['-q']
+    pytest_args: list = []
     if args.environment:
         pytest_args.append(f'--environment={args.environment}')
 

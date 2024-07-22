@@ -209,6 +209,65 @@ class TestShippingMethods:
         )
 
     # ==================Product Attrib Tab================== #
+    def test_canpost_tests_user(self, page: ShippingMethods, data: dict):
+        if 'Pitney' in data['shipping_method_name']:
+            pytest.skip(
+                'Skipping Canada Post Credential check in Pitney Bowes'
+            )
+
+        page.navigate_tab_canpost_credentials()
+        correct_user: str = data['test_username']
+        user: str = page.get_canpost_dev_username()
+        assert user == correct_user, (
+            'Canada Post staging username is not configured correctly'
+        )
+
+    def test_canpost_tests_pass(self, page: ShippingMethods, data: dict):
+        if 'Pitney' in data['shipping_method_name']:
+            pytest.skip(
+                'Skipping Canada Post Credential check in Pitney Bowes'
+            )
+
+        page.navigate_tab_canpost_credentials()
+        correct_pass: str = data['test_password']
+        password: str = page.get_canpost_dev_password()
+        assert password == correct_pass, (
+            'Canada Post staging password is not configured correctly'
+        )
+
+    def test_canpost_prod_user(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
+        if 'Pitney' in data['shipping_method_name']:
+            pytest.skip(
+                'Canada Post staging password is not configured correctly'
+            )
+        if environment == 'staging':
+            pytest.skip('Skipping production credential check')
+
+        page.navigate_tab_canpost_credentials()
+        correct_user: str = data['production_username']
+        user: str = page.get_canpost_prod_username()
+        assert user == correct_user, (
+            'Canada Post production username is not configured correctly'
+        )
+
+    def test_canpost_prod_pass(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
+        if 'Pitney' in data['shipping_method_name']:
+            pytest.skip(
+                'Skipping Canada Post Credential check in Pitney Bowes'
+            )
+        if environment == 'staging':
+            pytest.skip(
+                'Canada Post production password is not configured correctly'
+            )
+
+        page.navigate_tab_canpost_credentials()
+        correct_pass: str = data['production_password']
+        password: str = page.get_canpost_prod_password()
+        assert password == correct_pass, (
+            'Canada Post production password is not configured correctly'
+        )
+
+    # ==================Product Attrib Tab================== #
     def test_included_attrib(self, page: ShippingMethods, data: dict):
         page.navigate_tab_product_attrib()
         correct_include: list = data['included_attributes']
