@@ -62,7 +62,9 @@ class ShippingMethods(BasePage):
 
     def get_delivery_product(self) -> str:
         delivery_product = self.driver.find_element(By.ID, 'product_id')
-        delivery_product_name: str = delivery_product.get_attribute('value')  #type: ignore
+        delivery_product_name: str = (
+                delivery_product.get_attribute('value')
+        )  # type: ignore
         return delivery_product_name
 
     def get_countries(self) -> list:
