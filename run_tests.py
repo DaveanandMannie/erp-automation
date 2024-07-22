@@ -5,7 +5,7 @@ import pytest
 def main():
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
-        '-r', '--repeat',
+        '-c', '--count',
         type=int,
         default=1,
         help='Number of times to repeat the test(default = 1)'
@@ -17,13 +17,13 @@ def main():
         help='Choose environemnt (default = staging)'
     )
     args = parser.parse_args()
-    pytest_args: list = []
+    pytest_args: list[str] = ['-rs']
     if args.environment:
         pytest_args.append(f'--environment={args.environment}')
 
     # this is not best prac
 
-    for _ in range(args.repeat):
+    for _ in range(args.count):
         pytest.main(pytest_args)
 
 

@@ -125,8 +125,10 @@ class TestShippingMethods:
         state: str = page.get_void_ship()
         assert state == correct_state, 'Void shipment is not on'
 
-    def test_service_type(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_extra()
+    def test_service_type(self, page: ShippingMethods, data: dict, environment: str):  # noqa E501
+        if environment == 'production':
+            # TODO: REMOVE ONCE PROD IS UPDATED
+            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
         correct_service: str = data['service_type']
         service: str = page.get_service_type()
         assert service == correct_service, (
@@ -238,7 +240,7 @@ class TestShippingMethods:
     def test_canpost_prod_user(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
         if 'Pitney' in data['shipping_method_name']:
             pytest.skip(
-                'Canada Post staging password is not configured correctly'
+                'Skipping Canada Post Credential check in Pitney Bowes'
             )
         if environment == 'staging':
             pytest.skip('Skipping production credential check')
@@ -257,7 +259,7 @@ class TestShippingMethods:
             )
         if environment == 'staging':
             pytest.skip(
-                'Canada Post production password is not configured correctly'
+                'Skipping production credential check'
             )
 
         page.navigate_tab_canpost_credentials()
