@@ -14,7 +14,7 @@ def main():
         '-e', '--environment',
         choices=['staging', 'production'],
         default='staging',
-        help='Choose environemnt'
+        help='Choose environemnt (default = staging)'
     )
     args = parser.parse_args()
     pytest_args: list[str] = ['-q']
