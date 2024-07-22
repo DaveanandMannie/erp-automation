@@ -7,10 +7,6 @@ class ShippingMethods(BasePage):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
-    def navigate(self, url: str):
-        self.driver.get(url)
-        return
-
     def navigate_tab_destination(self):
         tab_elem = self.driver.find_element(
             By.LINK_TEXT, 'Destination Availability'
@@ -29,6 +25,7 @@ class ShippingMethods(BasePage):
         )
         tab_elem.click()
 
+# =============== Destination Availability=============== #
     def get_shipping_provider(self) -> str:
         provider_elem = self.driver.find_element(By.ID, 'delivery_type')
         provider: str = provider_elem.get_attribute('value')  # type: ignore
@@ -82,6 +79,7 @@ class ShippingMethods(BasePage):
         prefix_list: list = zip_badges[0].text.split('\n')
         return prefix_list
 
+# =============== Extra tab =============== #
     def get_default_weight(self) -> str:
         def_weight_elem = self.driver.find_element(
             By.ID, 'default_product_weight'
@@ -158,6 +156,7 @@ class ShippingMethods(BasePage):
         behalf: str = behalf_elem.get_attribute('value')  # type: ignore
         return behalf
 
+# =============== Include / exclude  tab =============== #
     def get_included_attribs(self) -> list:
         included_attributes_spans = self.driver.find_element(
             By.NAME, 'included_attribute_ids'

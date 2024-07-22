@@ -48,5 +48,9 @@ class BasePage:
                 password_box.send_keys(char)
         login_button.click()
 
+    def navigate(self, url: str):
+        self.driver.get(url)
+        return
+
     def close(self):
         self.driver.close()
