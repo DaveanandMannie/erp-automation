@@ -212,7 +212,7 @@ class TestShippingMethods:
     def test_canpost_tests_user(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
             pytest.skip(
-                'Skipping Canada Post Credential check in Pitney Bowes'
+                f'Skipping Canada Post Credential check in {data['shipping_method_name']}'  # noqa E501
             )
 
         page.navigate_tab_canpost_credentials()
@@ -225,7 +225,7 @@ class TestShippingMethods:
     def test_canpost_tests_pass(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
             pytest.skip(
-                'Skipping Canada Post Credential check in Pitney Bowes'
+                f'Skipping Canada Post Credential check in {data['shipping_method_name']}'  # noqa E501
             )
 
         page.navigate_tab_canpost_credentials()
@@ -238,7 +238,7 @@ class TestShippingMethods:
     def test_canpost_prod_user(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
         if 'Pitney' in data['shipping_method_name']:
             pytest.skip(
-                'Skipping Canada Post Credential check in Pitney Bowes'
+                f'Skipping Canada Post Credential check in {data['shipping_method_name']}'  # noqa E501
             )
         if environment == 'staging':
             pytest.skip('Skipping production credential check')
@@ -253,7 +253,7 @@ class TestShippingMethods:
     def test_canpost_prod_pass(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
         if 'Pitney' in data['shipping_method_name']:
             pytest.skip(
-                'Skipping Canada Post Credential check in Pitney Bowes'
+                f'Skipping Canada Post Credential check in {data['shipping_method_name']}'  # noqa E501
             )
         if environment == 'staging':
             pytest.skip(
