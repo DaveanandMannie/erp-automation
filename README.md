@@ -21,3 +21,7 @@ Use ```--environment <staging or production>```  or ```-e <staging or production
 1. Other configurations and their children
 2. End to End product movement
 3. state testing :(
+
+
+### Example Output
+![image](https://github.com/user-attachments/assets/a8b3120d-c68c-4969-91da-11bc054c3e23)
