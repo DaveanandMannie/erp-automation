@@ -8,7 +8,7 @@ from glob import glob
 class TestShippingMethods:
     @pytest.fixture(scope='class')
     def page(self, request):
-        ''' Selenium driver with scraper '''
+        """ Selenium driver with scraper """
         environment: str = request.config.getoption('--environment')
         page: ShippingMethods = ShippingMethods("--headless")
         if environment == 'staging':
@@ -116,7 +116,7 @@ class TestShippingMethods:
         correct_package: str = data['packaging']
         package: str = page.get_packaging()
         assert package == correct_package, (
-                ' The packaging is not configured correctly'
+                'The packaging is not configured correctly'
         )
 
     def test_void_ship(self, page: ShippingMethods, data: dict):
