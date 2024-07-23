@@ -27,8 +27,10 @@ class TestShippingMethods:
             data = json.load(file)
             if environment == 'staging':
                 page.navigate(data['staging_url'])
+
             if environment == 'production':
                 page.navigate(data['production_url'])
+
             sleep(0.5)
             return data
 
@@ -44,6 +46,9 @@ class TestShippingMethods:
         page.navigate_tab_destination()
         correct_provider: str = data['provider']
         provider = page.get_shipping_provider()
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            provider = provider.replace('_', ' ').title()
         assert provider == correct_provider, (
                 'The shipping provider is incorrect'
         )
@@ -124,10 +129,11 @@ class TestShippingMethods:
         state: str = page.get_void_ship()
         assert state == correct_state, 'Void shipment is not on'
 
-    def test_service_type(self, page: ShippingMethods, data: dict, environment: str):  # noqa E501
+    def test_service_type(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
         if environment == 'production':
             # TODO: REMOVE ONCE PROD IS UPDATED
             pytest.skip('REMOVE ONCE PROD IS UPGRADED')
+
         correct_service: str = data['service_type']
         service: str = page.get_service_type()
         assert service == correct_service, (
@@ -136,7 +142,10 @@ class TestShippingMethods:
 
     def test_service_option(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
 
         page.navigate_tab_extra()
         correct_option: str = data['desired_option']
@@ -147,7 +156,10 @@ class TestShippingMethods:
 
     def test_customer_type(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
 
         page.navigate_tab_extra()
         correct_type: str = data['customer_type']
@@ -158,7 +170,10 @@ class TestShippingMethods:
 
     def test_customer_num(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
 
         page.navigate_tab_extra()
         correct_num: str = data['customer_number']
@@ -169,7 +184,10 @@ class TestShippingMethods:
 
     def test_contract_id(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
 
         page.navigate_tab_extra()
         correct_contract: str = data['contract_id']
@@ -180,7 +198,10 @@ class TestShippingMethods:
 
     def test_promo(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
 
         page.navigate_tab_extra()
         correct_promo: str = data['promo_code']
@@ -189,7 +210,10 @@ class TestShippingMethods:
 
     def test_payment_method(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
 
         page.navigate_tab_extra()
         correct_method: str = data['method_of_payments']
@@ -200,7 +224,10 @@ class TestShippingMethods:
 
     def test_on_behalf(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
         page.navigate_tab_extra()
         correct_behalf: str = data['on_behalf_of']
         behalf: str = page.get_mailed_on_behalf()
@@ -208,12 +235,13 @@ class TestShippingMethods:
                 'Mailed on behalf of is not configured correctly'
         )
 
-    # ==================Product Attrib Tab================== #
+    # ==================Credential Tab(s)================== #
     def test_canpost_tests_user(self, page: ShippingMethods, data: dict):
-        if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(
-                f'Skipping Canada Post Credential check in {data['shipping_method_name']}'  # noqa E501
-            )
+        if 'Pitney' in data['shipping_method_name']:  # noqa: E501
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
 
         page.navigate_tab_canpost_credentials()
         correct_user: str = data['test_username']
@@ -224,9 +252,10 @@ class TestShippingMethods:
 
     def test_canpost_tests_pass(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(
-                f'Skipping Canada Post Credential check in {data['shipping_method_name']}'  # noqa E501
-            )
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
 
         page.navigate_tab_canpost_credentials()
         correct_pass: str = data['test_password']
@@ -237,9 +266,11 @@ class TestShippingMethods:
 
     def test_canpost_prod_user(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(
-                f'Skipping Canada Post Credential check in {data['shipping_method_name']}'  # noqa E501
-            )
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
+
         if environment == 'staging':
             pytest.skip('Skipping production credential check')
 
@@ -252,13 +283,13 @@ class TestShippingMethods:
 
     def test_canpost_prod_pass(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
         if 'Pitney' in data['shipping_method_name']:
-            pytest.skip(
-                f'Skipping Canada Post Credential check in {data['shipping_method_name']}'  # noqa E501
-            )
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa: E501
+
+        if 'Letter Mail' in data['shipping_method_name']:
+            pytest.skip(f'Skipping APPAREL specific test on {data['shipping_method_name']}')  # noqa: E501
+
         if environment == 'staging':
-            pytest.skip(
-                'Skipping production credential check'
-            )
+            pytest.skip('Skipping production credential check')
 
         page.navigate_tab_canpost_credentials()
         correct_pass: str = data['production_password']
@@ -268,7 +299,11 @@ class TestShippingMethods:
         )
 
     # ==================Product Attrib Tab================== #
-    def test_included_attrib(self, page: ShippingMethods, data: dict):
+    def test_included_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
+        if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
+            # TODO: REMOVE ONCE PROD IS UPDATED
+            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
+
         page.navigate_tab_product_attrib()
         correct_include: list = data['included_attributes']
         include: list = page.get_included_attribs()
@@ -276,7 +311,11 @@ class TestShippingMethods:
                 'Included attributes are not configured correctly'
         )
 
-    def test_excluded_attrib(self, page: ShippingMethods, data: dict):
+    def test_excluded_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
+        if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
+            # TODO: REMOVE ONCE PROD IS UPDATED
+            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
+
         page.navigate_tab_product_attrib()
         correct_exclude: list = data['included_attributes']
         exclude: list = page.get_included_attribs()
