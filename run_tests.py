@@ -10,19 +10,30 @@ def main():
         default=1,
         help='Number of times to repeat the test(default = 1)'
     )
+
     parser.add_argument(
         '-e', '--environment',
         choices=['staging', 'production'],
         default='staging',
         help='Choose environemnt (default = staging)'
     )
+    parser.add_argument(
+        '--tb',
+        choices=['auto', 'long', 'short', 'line', 'native', 'no'],
+        default='short',
+        help='Choose traceback length (default = short)'
+    )
+
     args = parser.parse_args()
     pytest_args: list[str] = ['-rs']
+
     if args.environment:
         pytest_args.append(f'--environment={args.environment}')
 
-    # this is not best prac
+    if args.tb:
+        pytest_args.append(f'--tb={args.tb}')
 
+    # this is not best prac
     for _ in range(args.count):
         pytest.main(pytest_args)
 
