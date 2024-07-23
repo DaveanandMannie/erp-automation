@@ -51,13 +51,13 @@ class ShippingMethods(BasePage):
         name: str = name_elem.get_attribute('value')  # type: ignore
         return name
 
-    def get_related_company(self) -> str:
+    def get_related_company(self) -> bool:
         related_elem = self.driver.find_element(
             By.ID, 'related_to_client_company'
         )
         if not related_elem:
             raise Exception('Element error: Not Found')
-        is_on: str = related_elem.get_attribute('value')  # type: ignore
+        is_on: bool = related_elem.is_selected()
         return is_on
 
     def get_company_names(self) -> list:
@@ -163,9 +163,9 @@ class ShippingMethods(BasePage):
         package: str = package_elem.get_attribute('value')  # type: ignore
         return package
 
-    def get_void_ship(self) -> str:
+    def get_void_ship(self) -> bool:
         void_elem = self.driver.find_element(By.ID, 'void_shipment')
-        void: str = void_elem.get_attribute('value')  # type: ignore
+        void: bool = void_elem.is_selected()
         return void
 
     def get_service_type(self) -> str:

@@ -5,6 +5,7 @@ from time import sleep
 from glob import glob
 
 
+# TODO: add dynamic test name to failure message
 class TestShippingMethods:
     @pytest.fixture(scope='class')
     def page(self, request):
@@ -55,8 +56,8 @@ class TestShippingMethods:
 
     def test_related_company(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
-        correct_state: str = data['related_company_switch']
-        state: str = page.get_related_company()
+        correct_state: bool = bool(data['related_company_switch'])
+        state: bool = page.get_related_company()
         assert state == correct_state, 'Related to companies is not on'
 
     def test_company_names(self, page: ShippingMethods, data: dict):
@@ -125,8 +126,8 @@ class TestShippingMethods:
 
     def test_void_ship(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
-        correct_state: str = data['void_shipment_switch']
-        state: str = page.get_void_ship()
+        correct_state: bool = bool(data['void_shipment_switch'])
+        state: bool = page.get_void_ship()
         assert state == correct_state, 'Void shipment is not on'
 
     def test_service_type(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
