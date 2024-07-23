@@ -137,8 +137,8 @@ class TestShippingMethods:
 
     def test_service_option(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            assert True
-            return
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+
         page.navigate_tab_extra()
         correct_option: str = data['desired_option']
         option: str = page.get_service_option()
@@ -148,8 +148,8 @@ class TestShippingMethods:
 
     def test_customer_type(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            assert True
-            return
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+
         page.navigate_tab_extra()
         correct_type: str = data['customer_type']
         c_type: str = page.get_customer_type()
@@ -159,8 +159,8 @@ class TestShippingMethods:
 
     def test_customer_num(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            assert True
-            return
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+
         page.navigate_tab_extra()
         correct_num: str = data['customer_number']
         num: str = page.get_customer_number()
@@ -170,8 +170,8 @@ class TestShippingMethods:
 
     def test_contract_id(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            assert True
-            return
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+
         page.navigate_tab_extra()
         correct_contract: str = data['contract_id']
         contract: str = page.get_contract_id()
@@ -181,8 +181,8 @@ class TestShippingMethods:
 
     def test_promo(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            assert True
-            return
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+
         page.navigate_tab_extra()
         correct_promo: str = data['promo_code']
         promo: str = page.get_promo_code()
@@ -190,8 +190,8 @@ class TestShippingMethods:
 
     def test_payment_method(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            assert True
-            return
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
+
         page.navigate_tab_extra()
         correct_method: str = data['method_of_payments']
         method: str = page.get_payment_method()
@@ -201,8 +201,7 @@ class TestShippingMethods:
 
     def test_on_behalf(self, page: ShippingMethods, data: dict):
         if 'Pitney' in data['shipping_method_name']:
-            assert True
-            return
+            pytest.skip(f'Skipping Canada Post specific test on {data['shipping_method_name']}')  # noqa E501
         page.navigate_tab_extra()
         correct_behalf: str = data['on_behalf_of']
         behalf: str = page.get_mailed_on_behalf()
