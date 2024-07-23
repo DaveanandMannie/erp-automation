@@ -19,7 +19,7 @@ class TestShippingMethods:
 
     @pytest.fixture(
         scope='class',
-        params=glob('testcases_json/apparel_shipping_methods/*.json')
+        params=glob('testcases_json/shipping_methods/*.json')
     )
     def data(self, request, page: ShippingMethods, environment: str):
         """ Paramitize for multiple json test cases """
