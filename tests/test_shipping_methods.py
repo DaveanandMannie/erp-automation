@@ -17,7 +17,6 @@ class TestShippingMethods:
             page.login_prod()
         return page
 
-    # TODO: dynamically add staging vs prod bool
     @pytest.fixture(
         scope='class',
         params=glob('testcases_json/apparel_shipping_methods/*.json')

@@ -188,7 +188,6 @@ class ShippingMethods(BasePage):
         customer_type = customer_type.replace('"', '')  # type: ignore
         return customer_type  # type: ignore
 
-    # TODO: handle type int vs str
     def get_customer_number(self) -> str:
         customer_number_elem = self.driver.find_element(
             By.ID, 'canpost_customer_number'
