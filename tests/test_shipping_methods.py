@@ -11,7 +11,7 @@ class TestShippingMethods:
     def page(self, request):
         """ Selenium driver with scraper """
         environment: str = request.config.getoption('--environment')
-        page: ShippingMethods = ShippingMethods("--headless")
+        page: ShippingMethods = ShippingMethods('--headless')
         if environment == 'staging':
             page.login_staging()
         if environment == 'production':
@@ -34,6 +34,8 @@ class TestShippingMethods:
 
             sleep(0.5)
             return data
+
+    # ============= Tests ============= #
 
     def test_name(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
