@@ -302,17 +302,18 @@ class TestShippingMethods:
         )
 
     # ==================Product Attrib Tab================== #
-    def test_included_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
-        if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
-            # TODO: REMOVE ONCE PROD IS UPDATED
-            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
-
-        page.navigate_tab_product_attrib()
-        correct_include: list = data['included_attributes']
-        include: list = page.get_included_attribs()
-        assert include == correct_include, (
-                'Included attributes are not configured correctly'
-        )
+    # This is "To be deperecated"
+#    def test_included_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
+#        if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
+#            # TODO: REMOVE ONCE PROD IS UPDATED
+#            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
+#
+#        page.navigate_tab_product_attrib()
+#        correct_include: list = data['included_attributes']
+#        include: list = page.get_included_attribs()
+#       assert include == correct_include, (
+#               'Included attributes are not configured correctly'
+#        )
 
     def test_excluded_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
         if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
