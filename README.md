@@ -17,6 +17,8 @@ Use ```--count <int>``` or ```-c <int>``` To run the test multiple times
 
 Use ```--environment <staging or production>```  or ```-e <staging or production>``` To choose which instance to test on
 
+Use ```-f <test script path>``` or ```-file <test script path>``` To run a specific tests script
+
 ## Next Tests
 1. Other configurations and their children
 2. End to End product movement

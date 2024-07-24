@@ -4,6 +4,7 @@ import pytest
 
 def main():
     parser: ArgumentParser = ArgumentParser()
+
     parser.add_argument(
         '-c', '--count',
         type=int,
@@ -17,11 +18,17 @@ def main():
         default='staging',
         help='Choose environemnt (default = staging)'
     )
+
     parser.add_argument(
         '--tb',
         choices=['auto', 'long', 'short', 'line', 'native', 'no'],
         default='short',
         help='Choose traceback length (default = short)'
+    )
+
+    parser.add_argument(
+        '-f', '--file',
+        help='Specific test to run (default = None'
     )
 
     args = parser.parse_args()
@@ -32,6 +39,9 @@ def main():
 
     if args.tb:
         pytest_args.append(f'--tb={args.tb}')
+
+    if args.file:
+        pytest_args.insert(0, args.file)
 
     # this is not best prac
     for _ in range(args.count):
