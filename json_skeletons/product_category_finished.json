@@ -1,0 +1,21 @@
+
+{
+    "name": "",
+    "staging_url": "",
+    "production_url": "",
+    "parent_category": "",
+    "is_general_category": "",
+    "required_pallet": "",
+    "requried_profile": "",
+    "required_batching": "",
+    "required_binning": "",
+    "product_bin_by": "",
+    "routes": [""],
+    "total_routes":[""],
+    "removal_strategy": "",
+    "costing_method": "",
+    "inventory_valuation": "",
+    "print_profile": "",
+    "pallet_type": "",
+    "filename_format": ""
+}
