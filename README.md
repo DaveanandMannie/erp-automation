@@ -3,6 +3,37 @@ This test suite was created in order to speed up internal testing. It uses Selen
 end user behaviour is as expected. 
 
 ## Project Structure
+
+```
+automated_tests/
+├── .venv
+├── json_skeletons/
+│   ├── apparel_shipping_template.json
+│   └── *other JSON templates for tests
+├── pages/
+│   ├── __init__.py
+│   ├── base.py
+│   ├── product_category.py
+│   └── shipping_methods.py
+├── testcases_json/
+│   ├── shipping_methods/
+│   │   └── *JSON of all base cases
+│   └── product_categories/
+│       ├── finished/
+│       │   └── *JSON of all base cases
+│       └── raw/
+│           └── *JSON of all base cases
+├── tests/
+│   ├── __init__.py
+│   ├── test_product_categories.py
+│   └── tests_shipping_methods.py
+├── .env
+├── README.md
+├── conftest.py
+├── requirements.txt
+└── runtests.py
+```
+```
 The backbone of the tests is Pytest. Currently, the only test suite is to check if shipping methods are configured correctly.
 Filling out the JSON skeleton and placing it into the ```testcases_json/<desired test folder> ``` it will append that json
 data and run all the test outlined in the script. 
