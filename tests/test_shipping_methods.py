@@ -58,8 +58,8 @@ class TestShippingMethods:
 
     def test_related_company(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
-        correct_state: bool = bool(data['related_company_switch'])
-        state: bool = page.get_related_company()
+        correct_state: str = data['related_company_switch']
+        state: str = str(page.get_related_company())
         assert state == correct_state, 'Related to companies is not on'
 
     def test_company_names(self, page: ShippingMethods, data: dict):
@@ -128,8 +128,8 @@ class TestShippingMethods:
 
     def test_void_ship(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
-        correct_state: bool = bool(data['void_shipment_switch'])
-        state: bool = page.get_void_ship()
+        correct_state: str = data['void_shipment_switch']
+        state: str = str(page.get_void_ship())
         assert state == correct_state, 'Void shipment is not on'
 
     def test_service_type(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
@@ -321,8 +321,8 @@ class TestShippingMethods:
             pytest.skip('REMOVE ONCE PROD IS UPGRADED')
 
         page.navigate_tab_product_attrib()
-        correct_exclude: list = data['included_attributes']
-        exclude: list = page.get_included_attribs()
+        correct_exclude: list = data['excluded_attributes']
+        exclude: list = page.get_excluded_attribs()
         assert exclude == correct_exclude, (
                 'Excluded attributes are not configured correctly'
         )
