@@ -1,5 +1,6 @@
 from pages.base import BasePage
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 
 class ProductCategory(BasePage):
@@ -46,7 +47,8 @@ class ProductCategory(BasePage):
 
     def get_bin_by(self) -> str:
         by_elem = self.driver.find_element(By.ID, 'product_bin_by')
-        by: str = by_elem.get_attribute('value')  # type: ignore
+        by_option = Select(by_elem).first_selected_option
+        by: str = by_option.text
         return by
 
     # ============ Logistcs ============ #
@@ -70,12 +72,14 @@ class ProductCategory(BasePage):
 
     def get_costing_methods(self) -> str:
         cost_elem = self.driver.find_element(By.ID, 'property_cost_method')
-        cost: str = cost_elem.text
+        cost_option = Select(cost_elem).first_selected_option
+        cost: str = cost_option.text
         return cost
 
     def get_valuation(self) -> str:
         val_elem = self.driver.find_element(By.ID, 'property_valuation')
-        val: str = val_elem.text
+        selected_val = Select(val_elem).first_selected_option
+        val: str = selected_val.text
         return val
 
     # ============ printing details ============ #

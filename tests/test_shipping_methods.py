@@ -305,7 +305,6 @@ class TestShippingMethods:
     # This is "To be deperecated"
 #    def test_included_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
 #        if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
-#            # TODO: REMOVE ONCE PROD IS UPDATED
 #            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
 #
 #        page.navigate_tab_product_attrib()
