@@ -1,5 +1,5 @@
 import pytest
-from pytest import Parser, FixtureRequest
+from pytest import FixtureRequest, Parser
 
 
 def pytest_addoption(parser: Parser):

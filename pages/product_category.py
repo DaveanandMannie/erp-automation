@@ -1,6 +1,7 @@
-from pages.base import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+
+from pages.base import BasePage
 
 
 class ProductCategory(BasePage):

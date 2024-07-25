@@ -1,8 +1,9 @@
 import os
+
 from dotenv import load_dotenv
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 
@@ -20,8 +21,8 @@ class BasePage:
     def login_staging(self):
         self.driver.get('https://staging.odoo.printgeek.ca')
         email_box: WebElement = self.driver.find_element(By.ID, 'login')
-        password_box: WebElement  = self.driver.find_element(By.ID, 'password')
-        login_button: WebElement  = self.driver.find_element(
+        password_box: WebElement = self.driver.find_element(By.ID, 'password')
+        login_button: WebElement = self.driver.find_element(
             By.XPATH, "//button[@type='submit' and contains(text(), 'Log in')]"
         )
 
@@ -35,9 +36,9 @@ class BasePage:
 
     def login_prod(self):
         self.driver.get('https://odoo.printgeek.ca')
-        email_box: WebElement  = self.driver.find_element(By.ID, 'login')
-        password_box: WebElement  = self.driver.find_element(By.ID, 'password')
-        login_button: WebElement  = self.driver.find_element(
+        email_box: WebElement = self.driver.find_element(By.ID, 'login')
+        password_box: WebElement = self.driver.find_element(By.ID, 'password')
+        login_button: WebElement = self.driver.find_element(
             By.XPATH, "//button[@type='submit' and contains(text(), 'Log in')]"
         )
 

@@ -1,9 +1,11 @@
-import pytest
-from pytest import FixtureRequest
 import json
-from pages.shipping_methods import ShippingMethods
-from time import sleep
 from glob import glob
+from time import sleep
+
+
+import pytest
+from pages.shipping_methods import ShippingMethods
+from pytest import FixtureRequest
 
 
 # TODO: add dynamic test name to failure message

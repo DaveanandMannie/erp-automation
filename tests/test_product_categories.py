@@ -3,8 +3,8 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pytest import FixtureRequest
 from pages.product_category import ProductCategory
+from pytest import FixtureRequest
 
 
 # TODO: decide to decode json
