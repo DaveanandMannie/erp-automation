@@ -47,7 +47,11 @@ Use ```--count <int>``` or ```-c <int>``` To run the test multiple times
 
 Use ```--environment <staging or production>```  or ```-e <staging or production>``` To choose which instance to test on
 
-Use ```-f <test script path>``` or ```-file <test script path>``` To run a specific tests script
+Use ```--file <test script path>``` or ```-f <test script path>``` To run a specific tests script
+
+Use ```--window ``` To watch the test go through the UI or ```--window kiosk``` for fullscreen
+    -> [!WARNING]
+    > you may interefere with the test if you intereact with the browser manually
 
 ## Next Tests
 1. Other configurations and their children

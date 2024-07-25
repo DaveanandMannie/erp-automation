@@ -14,7 +14,12 @@ class TestShippingMethods:
     def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """
         environment: str = request.config.getoption('--environment')  # pyright: ignore[reportAssignmentType]  # noqa: E501
-        page: ShippingMethods = ShippingMethods('--headless')
+        driver_arg: str = request.config.getoption('--window')  # pyright: ignore[reportAssignmentType]  # noqa: E501
+        if driver_arg:
+            page: ShippingMethods = ShippingMethods(driver_arg)
+        else:
+            page: ShippingMethods = ShippingMethods()
+
         if environment == 'staging':
             page.login_staging()
         if environment == 'production':

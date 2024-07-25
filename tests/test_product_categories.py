@@ -13,7 +13,11 @@ class TestFinishedProductCategories:
     def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """
         environment: str = request.config.getoption('--environment')  # pyright: ignore[reportAssignmentType]  # noqa: E501
-        page: ProductCategory = ProductCategory('--headless')
+        driver_arg: str = request.config.getoption('--window')  # pyright: ignore[reportAssignmentType]  # noqa: E501
+        if driver_arg:
+            page: ProductCategory = ProductCategory(driver_arg)
+        else:
+            page: ProductCategory = ProductCategory()
 
         if environment == 'staging':
             page.login_staging()
@@ -125,8 +129,12 @@ class TestRawProductCategories:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """
+        driver_arg: str = request.config.getoption('--window')  # pyright: ignore[reportAssignmentType]  # noqa: E501
         environment: str = request.config.getoption('--environment')  # pyright: ignore[reportAssignmentType]  # noqa: E501
-        page: ProductCategory = ProductCategory('--headless')
+        if driver_arg:
+            page: ProductCategory = ProductCategory(driver_arg)
+        else:
+            page: ProductCategory = ProductCategory()
 
         if environment == 'staging':
             page.login_staging()
