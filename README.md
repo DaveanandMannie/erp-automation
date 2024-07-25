@@ -33,7 +33,6 @@ automated_tests/
 ├── requirements.txt
 └── runtests.py
 ```
-```
 The backbone of the tests is Pytest. Currently, the only test suite is to check if shipping methods are configured correctly.
 Filling out the JSON skeleton and placing it into the ```testcases_json/<desired test folder> ``` it will append that json
 data and run all the test outlined in the script. 
