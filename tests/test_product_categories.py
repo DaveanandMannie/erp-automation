@@ -7,7 +7,7 @@ from pages.product_category import ProductCategory
 
 
 # TODO: decide to decode json
-class TestProductCategories:
+class TestFinishedProductCategories:
     @pytest.fixture(scope='class')
     def page(self, request):
         """ Selenium driver with scraper """
@@ -118,3 +118,34 @@ class TestProductCategories:
         correct_val: str = data['filename_format']
         val: str = page.get_file_name()
         assert val == correct_val, f'File name format is not configured correctly:{data['name']}'  # noqa: E501
+
+
+class TestRawProductCategories:
+    @pytest.fixture(scope='class')
+    def page(self, request):
+        """ Selenium driver with scraper """
+        environment: str = request.config.getoption('--environment')
+        page: ProductCategory = ProductCategory('--headless')
+
+        if environment == 'staging':
+            page.login_staging()
+        if environment == 'production':
+            page.login_prod()
+        return page
+
+    @pytest.fixture(
+        scope='class',
+        params=glob('testcases_json/product_categories/raw/*.json')
+    )
+    def data(self, request, page: ProductCategory, environment: str):
+        """Paramitize for multiple json test cases"""
+        with open(request.param, 'r') as file:
+            data = json.load(file)
+            if environment == 'staging':
+                page.navigate(data['staging_url'])
+
+            if environment == 'production':
+                page.navigate(data['production_url'])
+
+            sleep(0.5)
+            return data
