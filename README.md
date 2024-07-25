@@ -35,13 +35,13 @@ automated_tests/
 ```
 The backbone of the tests is Pytest. Currently, the only test suite is to check if shipping methods are configured correctly.
 Filling out the JSON skeleton and placing it into the ```testcases_json/<desired test folder> ``` it will append that json
-data and run all the test outlined in the script. 
-This allows extension of the test in the category as well as more components
+data and run all the tests outlined in the script. 
+This allows the extension of the test in the category as well as more components
 
 ## Usage
 Run ```python run_scripts.py``` and it will run the entire suite on our staging instance
 
-Use ```--tb <length of trace back>``` to adjust the length of trace back. All Pytest options are available
+Use ```--tb <length of trace back>``` to adjust the trace back length. All Pytest options are available
 
 Use ```--count <int>``` or ```-c <int>``` To run the test multiple times
 
@@ -50,8 +50,7 @@ Use ```--environment <staging or production>```  or ```-e <staging or production
 Use ```--file <test script path>``` or ```-f <test script path>``` To run a specific tests script
 
 Use ```--window ``` To watch the test go through the UI or ```--window kiosk``` for fullscreen
-    -> [!WARNING]
-    > you may interefere with the test if you intereact with the browser manually
+    -> [!WARNING]> you may interfere with the test if you interact with the browser manually
 
 ## Next Tests
 1. Other configurations and their children
