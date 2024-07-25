@@ -1,0 +1,8 @@
+{
+    "name": "Regular Parcel",
+    "staging_url": "https://staging.odoo.printgeek.ca/web#id=1&menu_id=356&cids=1&action=665&model=canpost.service.type&view_type=form",
+    "production_url": "https://odoo.printgeek.ca/web#id=1&menu_id=356&cids=1&action=665&model=canpost.service.type&view_type=form",
+    "code": "DOM.RP",
+    "look_up": "",
+    "provider": "Canada Post"
+}
