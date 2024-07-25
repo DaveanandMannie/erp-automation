@@ -1,4 +1,5 @@
 import pytest
+from pytest import FixtureRequest
 import json
 from pages.shipping_methods import ShippingMethods
 from time import sleep
@@ -8,9 +9,9 @@ from glob import glob
 # TODO: add dynamic test name to failure message
 class TestShippingMethods:
     @pytest.fixture(scope='class')
-    def page(self, request):
+    def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """
-        environment: str = request.config.getoption('--environment')
+        environment: str = request.config.getoption('--environment')  # pyright: ignore[reportAssignmentType]  # noqa: E501
         page: ShippingMethods = ShippingMethods('--headless')
         if environment == 'staging':
             page.login_staging()
@@ -22,7 +23,7 @@ class TestShippingMethods:
         scope='class',
         params=glob('testcases_json/shipping_methods/*.json')
     )
-    def data(self, request, page: ShippingMethods, environment: str):
+    def data(self, request: FixtureRequest, page: ShippingMethods, environment: str):  # noqa: E501
         """ Paramitize for multiple json test cases """
         with open(request.param, 'r') as file:
             data = json.load(file)

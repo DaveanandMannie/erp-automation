@@ -3,15 +3,16 @@ from glob import glob
 from time import sleep
 
 import pytest
+from pytest import FixtureRequest
 from pages.product_category import ProductCategory
 
 
 # TODO: decide to decode json
 class TestFinishedProductCategories:
     @pytest.fixture(scope='class')
-    def page(self, request):
+    def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """
-        environment: str = request.config.getoption('--environment')
+        environment: str = request.config.getoption('--environment')  # pyright: ignore[reportAssignmentType]  # noqa: E501
         page: ProductCategory = ProductCategory('--headless')
 
         if environment == 'staging':
@@ -24,7 +25,7 @@ class TestFinishedProductCategories:
         scope='class',
         params=glob('testcases_json/product_categories/finished/*.json')
     )
-    def data(self, request, page: ProductCategory, environment: str):
+    def data(self, request: FixtureRequest, page: ProductCategory, environment: str):  # noqa: E501
         """Paramitize for multiple json test cases"""
         with open(request.param, 'r') as file:
             data = json.load(file)
@@ -122,9 +123,9 @@ class TestFinishedProductCategories:
 
 class TestRawProductCategories:
     @pytest.fixture(scope='class')
-    def page(self, request):
+    def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """
-        environment: str = request.config.getoption('--environment')
+        environment: str = request.config.getoption('--environment')  # pyright: ignore[reportAssignmentType]  # noqa: E501
         page: ProductCategory = ProductCategory('--headless')
 
         if environment == 'staging':
@@ -137,7 +138,7 @@ class TestRawProductCategories:
         scope='class',
         params=glob('testcases_json/product_categories/raw/*.json')
     )
-    def data(self, request, page: ProductCategory, environment: str):
+    def data(self, request: FixtureRequest, page: ProductCategory, environment: str):  # noqa: E501
         """Paramitize for multiple json test cases"""
         with open(request.param, 'r') as file:
             data = json.load(file)
