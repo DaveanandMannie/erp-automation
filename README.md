@@ -14,9 +14,12 @@ automated_tests/
 │   ├── __init__.py
 │   ├── base.py
 │   ├── product_category.py
+│   ├── service_types.py
 │   └── shipping_methods.py
 ├── testcases_json/
 │   ├── shipping_methods/
+│   │   └── *JSON of all base cases
+│   ├── service_types/
 │   │   └── *JSON of all base cases
 │   └── product_categories/
 │       ├── finished/
@@ -26,6 +29,7 @@ automated_tests/
 ├── tests/
 │   ├── __init__.py
 │   ├── test_product_categories.py
+│   ├── test_service_types.py
 │   └── tests_shipping_methods.py
 ├── .env
 ├── README.md
