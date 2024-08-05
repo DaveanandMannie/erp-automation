@@ -1,0 +1,14 @@
+{
+    "name": "",
+    "staging_url": "",
+    "production_url": "",
+    "parent_category": "",
+    "routes": [""],
+    "total_routes":[""],
+    "removal_strategy": "",
+    "costing_method": "",
+    "inventory_valuation": "",
+    "print_profile": "",
+    "pallet_type": "",
+    "filename_format": ""
+}
