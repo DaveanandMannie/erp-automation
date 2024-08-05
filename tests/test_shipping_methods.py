@@ -140,7 +140,7 @@ class TestShippingMethods:
         state: str = str(page.get_void_ship())
         assert state == correct_state, 'Void shipment is not on'
 
-    def test_service_type(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
+    def test_service_type(self, page: ShippingMethods, data: dict):
         correct_service: str = data['service_type']
         service: str = page.get_service_type()
         assert service == correct_service, (
