@@ -125,7 +125,6 @@ class TestFinishedProductCategories:
         assert val == correct_val, f'File name format is not configured correctly:{data['name']}'  # noqa: E501
 
 
-# TODO: Decide if this is needed ?
 class TestRawProductCategories:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):

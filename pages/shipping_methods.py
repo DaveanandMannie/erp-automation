@@ -222,14 +222,6 @@ class ShippingMethods(BasePage):
         return behalf
 
 # =============== Include / exclude  tab =============== #
-    # TODO: to be depercatied
-    def get_included_attribs(self) -> list:
-        included_attributes_spans = self.driver.find_element(
-            By.NAME, 'included_attribute_ids'
-        )
-        included_attribs: list = included_attributes_spans.text.split('\n')
-        return included_attribs
-
     def get_excluded_attribs(self) -> list:
         excluded_attributes_spans = self.driver.find_element(
             By.NAME, 'excluded_attribute_ids'

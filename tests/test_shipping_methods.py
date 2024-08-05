@@ -141,10 +141,6 @@ class TestShippingMethods:
         assert state == correct_state, 'Void shipment is not on'
 
     def test_service_type(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
-        if environment == 'production':
-            # TODO: REMOVE ONCE PROD IS UPDATED
-            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
-
         correct_service: str = data['service_type']
         service: str = page.get_service_type()
         assert service == correct_service, (
@@ -323,10 +319,6 @@ class TestShippingMethods:
 #        )
 
     def test_excluded_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
-        if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
-            # TODO: REMOVE ONCE PROD IS UPDATED
-            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
-
         page.navigate_tab_product_attrib()
         correct_exclude: list = data['excluded_attributes']
         exclude: list = page.get_excluded_attribs()
