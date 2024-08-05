@@ -318,7 +318,7 @@ class TestShippingMethods:
 #               'Included attributes are not configured correctly'
 #        )
 
-    def test_excluded_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
+    def test_excluded_attrib(self, page: ShippingMethods, data: dict):
         page.navigate_tab_product_attrib()
         correct_exclude: list = data['excluded_attributes']
         exclude: list = page.get_excluded_attribs()
