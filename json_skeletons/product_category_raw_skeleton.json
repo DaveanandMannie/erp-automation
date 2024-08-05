@@ -3,6 +3,7 @@
     "staging_url": "",
     "production_url": "",
     "parent_category": "",
+    "is_general_category": "",
     "routes": [""],
     "total_routes":[""],
     "removal_strategy": "",
