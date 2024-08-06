@@ -17,7 +17,7 @@ automated_tests/
 │   ├── service_types.py
 │   └── shipping_methods.py
 ├── testcases_json/
-│   └── configs/
+    └── configs/
         ├── shipping_methods/
         │   └── *JSON of all base cases
         ├── service_types/
@@ -28,7 +28,7 @@ automated_tests/
             └── raw/
                 └── *JSON of all base cases
 ├── tests/
-│   └── configs/
+    └── configs/
         ├── __init__.py
         ├── test_product_categories.py
         ├── test_service_types.py
