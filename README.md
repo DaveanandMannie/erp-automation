@@ -17,17 +17,18 @@ automated_tests/
 │   ├── service_types.py
 │   └── shipping_methods.py
 ├── testcases_json/
-│   ├── shipping_methods/
-│   │   └── *JSON of all base cases
-│   ├── service_types/
-│   │   └── *JSON of all base cases
-│   └── product_categories/
-│       ├── finished/
-│       │   └── *JSON of all base cases
-│       └── raw/
-│           └── *JSON of all base cases
+│   └── configs/
+        ├── shipping_methods/
+        │   └── *JSON of all base cases
+        ├── service_types/
+        │   └── *JSON of all base cases
+        └── product_categories/
+            ├── finished/
+            │   └── *JSON of all base cases
+            └── raw/
+                └── *JSON of all base cases
 ├── tests/
-│   └── config/
+│   └── configs/
         ├── __init__.py
         ├── test_product_categories.py
         ├── test_service_types.py

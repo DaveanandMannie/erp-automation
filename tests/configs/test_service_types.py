@@ -27,7 +27,7 @@ class TestFinishedProductCategories:
 
     @pytest.fixture(
         scope='class',
-        params=glob('testcases_json/service_types/*.json')
+        params=glob('testcases_json/configs/service_types/*.json')
     )
     def data(self, request: FixtureRequest, page: ServiceType, environment: str):  # noqa: E501
         """Paramitize for multiple json test cases"""

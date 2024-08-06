@@ -3,7 +3,7 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pages.artworkmanifest import ManifestSettings
+from pages.routes import Routes
 from pytest import FixtureRequest
 
 
@@ -14,9 +14,9 @@ class TestArtworkManifestSettings:
         environment: str = request.config.getoption('--environment')  # pyright: ignore[reportAssignmentType]  # noqa: E501
         driver_arg: str = request.config.getoption('--window')  # pyright: ignore[reportAssignmentType]  # noqa: E501
         if driver_arg:
-            page: ManifestSettings = ManifestSettings(driver_arg)
+            page: Routes = Routes(driver_arg)
         else:
-            page: ManifestSettings = ManifestSettings()
+            page: Routes = Routes()
 
         if environment == 'staging':
             page.login_staging()
@@ -26,9 +26,9 @@ class TestArtworkManifestSettings:
 
     @pytest.fixture(
         scope='class',
-        params=glob('testcases_json/artworkmanifest_settings/*.json')
+        params=glob('testcases_json/configs/routes/*.json')
     )
-    def data(self, request: FixtureRequest, page: ManifestSettings, environment: str):  # noqa: E501
+    def data(self, request: FixtureRequest, page: Routes, environment: str):
         """Paramitize for multiple json test cases"""
         with open(request.param, 'r') as file:
             data = json.load(file)
@@ -40,11 +40,4 @@ class TestArtworkManifestSettings:
 
             sleep(0.5)
             return data
-    # ============= Tests ============= #
-
-    def test_manifest_settings(self, page: ManifestSettings, data: dict):
-        correct_settings: list = data['settings']
-        settings: list = page.get_manifest_fields()
-        assert settings == correct_settings, (
-            'Artwork Manifest Settings not configured correctly'
-        )
+# ========== tests ========== #

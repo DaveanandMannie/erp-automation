@@ -28,7 +28,7 @@ class TestShippingMethods:
 
     @pytest.fixture(
         scope='class',
-        params=glob('testcases_json/shipping_methods/*.json')
+        params=glob('testcases_json/configs/shipping_methods/*.json')
     )
     def data(self, request: FixtureRequest, page: ShippingMethods, environment: str):  # noqa: E501
         """ Paramitize for multiple json test cases """

@@ -27,7 +27,9 @@ class TestFinishedProductCategories:
 
     @pytest.fixture(
         scope='class',
-        params=glob('testcases_json/product_categories/finished/*.json')
+        params=glob(
+            'testcases_json/configs/product_categories/finished/*.json'
+        )
     )
     def data(self, request: FixtureRequest, page: ProductCategory, environment: str):  # noqa: E501
         """Paramitize for multiple json test cases"""
@@ -144,7 +146,7 @@ class TestRawProductCategories:
 
     @pytest.fixture(
         scope='class',
-        params=glob('testcases_json/product_categories/raw/*.json')
+        params=glob('testcases_json/configs/product_categories/raw/*.json')
     )
     def data(self, request: FixtureRequest, page: ProductCategory, environment: str):  # noqa: E501
         """Paramitize for multiple json test cases"""
