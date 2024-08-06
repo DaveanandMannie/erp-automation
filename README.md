@@ -8,36 +8,28 @@ end user behaviour is as expected.
 automated_tests/
 ├── .venv
 ├── json_skeletons/
-│   ├── apparel_shipping_template.json
-│   └── *other JSON templates for tests
+│   └── *json templates
 ├── pages/
-│   ├── __init__.py
 │   ├── base.py
-│   ├── product_category.py
+│   ├── product_cateogory.py
 │   ├── service_types.py
+│   ├── routes.py
+│   ├── artworkmanifest.py
 │   └── shipping_methods.py
 ├── testcases_json/
-    └── configs/
-        ├── shipping_methods/
-        │   └── *JSON of all base cases
-        ├── service_types/
-        │   └── *JSON of all base cases
-        └── product_categories/
-            ├── finished/
-            │   └── *JSON of all base cases
-            └── raw/
-                └── *JSON of all base cases
+│   └── configs/
+│       └── *live json test data
 ├── tests/
-    └── configs/
-        ├── __init__.py
-        ├── test_product_categories.py
-        ├── test_service_types.py
-        └── tests_shipping_methods.py
-├── .env
+│   └── configs/
+│       ├── test_artwork_manifest.py
+│       ├── test_product_categories.py
+│       ├── test_routes.py
+│       ├── test_service_types.py
+│       └── test_shipping_methods.py
 ├── README.md
 ├── conftest.py
-├── requirements.txt
-└── runtests.py
+├── run_tests.py
+└── requirements.txt
 ```
 The backbone of the tests is Pytest. Currently, the only test suite is to check if shipping methods are configured correctly.
 Filling out the JSON skeleton and placing it into the ```testcases_json/<desired test folder> ``` it will append that json
