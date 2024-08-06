@@ -27,10 +27,11 @@ automated_tests/
 │       └── raw/
 │           └── *JSON of all base cases
 ├── tests/
-│   ├── __init__.py
-│   ├── test_product_categories.py
-│   ├── test_service_types.py
-│   └── tests_shipping_methods.py
+│   └── config/
+        ├── __init__.py
+        ├── test_product_categories.py
+        ├── test_service_types.py
+        └── tests_shipping_methods.py
 ├── .env
 ├── README.md
 ├── conftest.py
