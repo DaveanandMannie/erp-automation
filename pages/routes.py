@@ -39,6 +39,21 @@ class Routes(BasePage):
         selected: bool = warehouse_elem.is_selected()
         return selected
 
+    def opt_get_warehouse_ids(self) -> list:
+        ids: list[str] = []
+        container_elem: WebElement = self.driver.find_element(
+            By.NAME,
+            'warehouse_ids'
+        )
+        spans: list[WebElement] = container_elem.find_elements(
+            By.TAG_NAME,
+            'span'
+        )
+        for span in spans:
+            print(span.text)
+            ids.append(span.text)
+        return ids
+
     def get_sales_lines_bool(self) -> bool:
         sales_elem: WebElement = self.driver.find_element(
             By.ID,
@@ -47,7 +62,7 @@ class Routes(BasePage):
         selected: bool = sales_elem.is_selected()
         return selected
 
-# ============= applicable on ============== #
+# ============= Rules ============== #
 
     def get_rules(self) -> list[list]:
         final_list: list = []

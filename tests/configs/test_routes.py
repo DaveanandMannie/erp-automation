@@ -65,6 +65,14 @@ class TestArtworkManifestSettings:
 
     def test_warehouses(self, page: Routes, data: dict):
         correct_val: str = data['warehouses']
+
+        if correct_val == 'True':
+            correct_opt: list = page.opt_get_warehouse_ids()
+            opt: list = data['warehouse_ids']
+            assert opt == correct_opt, (
+                f'List of warehouses not configured correctly for route: {data['name']}'  # noqa: E501
+            )
+
         val: str = str(page.get_warehouses_bool())
         assert val == correct_val, (
             f'Applied on warehouses is not correct for route: {correct_val}'
