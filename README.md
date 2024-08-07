@@ -58,3 +58,5 @@ Use ```--window ``` To watch the test go through the UI or ```--window kiosk``` 
 
 ### Example Output
 ![image](https://github.com/user-attachments/assets/a8b3120d-c68c-4969-91da-11bc054c3e23)
+![image](https://github.com/user-attachments/assets/3a60ef0f-6fbe-44dc-b217-adb04652aedb)
+
