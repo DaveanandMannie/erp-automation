@@ -41,3 +41,45 @@ class TestArtworkManifestSettings:
             sleep(0.5)
             return data
 # ========== tests ========== #
+
+    def test_name(self, page: Routes, data: dict):
+        correct_val: str = data['name']
+        val: str = page.get_name()
+        assert val == correct_val, (
+            f'Name is not configured correctly for route: {correct_val}'
+        )
+
+    def test_product_categories(self, page: Routes, data: dict):
+        correct_val: str = data['product_categories']
+        val: str = str(page.get_product_category_bool())
+        assert val == correct_val, (
+            f'Applied on product categories is not correct for route: {correct_val}'  # noqa: E501
+        )
+
+    def test_products(self, page: Routes, data: dict):
+        correct_val: str = data['products']
+        val: str = str(page.get_products_bool())
+        assert val == correct_val, (
+            f'Applied on products is not correct for route: {correct_val}'
+        )
+
+    def test_warehouses(self, page: Routes, data: dict):
+        correct_val: str = data['warehouses']
+        val: str = str(page.get_warehouses_bool())
+        assert val == correct_val, (
+            f'Applied on warehouses is not correct for route: {correct_val}'
+        )
+
+    def test_sales_lines(self, page: Routes, data: dict):
+        correct_val: str = data['sales_lines']
+        val: str = str(page.get_sales_lines_bool())
+        assert val == correct_val, (
+            f'Applied on sales lines is not correct for route: {correct_val}'
+        )
+
+    def test_rules(self,  page: Routes, data: dict):
+        correct_val: list = data['rules']
+        val: list = page.get_rules()
+        assert val == correct_val, (
+            f'One or more rules is not configured correctly for route {correct_val}'  # noqa: E501
+        )
