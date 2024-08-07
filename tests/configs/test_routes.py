@@ -38,7 +38,7 @@ class TestArtworkManifestSettings:
             if environment == 'production':
                 page.navigate(data['production_url'])
 
-            sleep(0.5)
+            sleep(0.9)
             return data
 # ========== tests ========== #
 

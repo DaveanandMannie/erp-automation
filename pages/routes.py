@@ -60,8 +60,16 @@ class Routes(BasePage):
             By.TAG_NAME,
             'tr'
         )
-        _ = rows.pop()
+
         for row in rows:
+            add_line_row: list[WebElement] = row.find_elements(
+                By.CLASS_NAME,
+                'o_field_x2many_list_row_add'
+            )
+
+            if add_line_row:
+                break
+
             temp_list: list = []
 
             action_elem: WebElement = row.find_element(By.NAME, 'action')
