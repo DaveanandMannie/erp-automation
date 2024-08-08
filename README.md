@@ -14,6 +14,7 @@ automated_tests/
 │   ├── product_cateogory.py
 │   ├── service_types.py
 │   ├── routes.py
+│   ├── rules.py
 │   ├── artworkmanifest.py
 │   └── shipping_methods.py
 ├── testcases_json/
@@ -24,6 +25,7 @@ automated_tests/
 │       ├── test_artwork_manifest.py
 │       ├── test_product_categories.py
 │       ├── test_routes.py
+│       ├── test_rules.py
 │       ├── test_service_types.py
 │       └── test_shipping_methods.py
 ├── README.md
