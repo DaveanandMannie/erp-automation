@@ -22,8 +22,12 @@ class TestFinishedProductCategories:
 
         if environment == 'staging':
             page.login_staging()
+
         if environment == 'production':
             page.login_prod()
+
+        if environment == 'uat':
+            page.login_uat()
         return page
 
     @pytest.fixture(
@@ -42,6 +46,8 @@ class TestFinishedProductCategories:
             if environment == 'production':
                 page.navigate(data['production_url'])
 
+            if environment == 'uat':
+                page.navigate(data['uat_url'])
             sleep(0.5)
             return data
 
@@ -141,8 +147,13 @@ class TestRawProductCategories:
 
         if environment == 'staging':
             page.login_staging()
+
         if environment == 'production':
             page.login_prod()
+
+        if environment == 'uat':
+            page.login_uat()
+
         return page
 
     @pytest.fixture(
@@ -158,6 +169,9 @@ class TestRawProductCategories:
 
             if environment == 'production':
                 page.navigate(data['production_url'])
+
+            if environment == 'uat':
+                page.navigate(data['uat_url'])
 
             sleep(0.5)
             return data

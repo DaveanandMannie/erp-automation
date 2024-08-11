@@ -11,44 +11,44 @@ class ProductCategory(BasePage):
         self.driver.implicitly_wait(5)
 
     def get_name(self) -> str:
-        name_elem = self.driver.find_element(By.ID, 'name')
+        name_elem = self.driver.find_element(By.ID, 'name_0')
         name: str = name_elem.get_attribute('value')  # type: ignore
         return name
 
     def get_parent_category(self) -> str:
-        category_elem = self.driver.find_element(By.ID, 'parent_id')
+        category_elem = self.driver.find_element(By.ID, 'parent_id_0')
         category: str = category_elem.get_attribute('value')  # type: ignore
         return category
 
     def get_general_category(self) -> bool:
-        category_elem = self.driver.find_element(By.ID, 'is_general_category')
+        category_elem = self.driver.find_element(By.ID, 'is_general_category_0')  # noqa: E501
         category: bool = category_elem.is_selected()
         return category
 
     def get_require_pallet(self) -> bool:
-        pallet_elem = self.driver.find_element(By.ID, 'required_pallet_type')
+        pallet_elem = self.driver.find_element(By.ID, 'required_pallet_type_0')
         pallet: bool = pallet_elem.is_selected()
         return pallet
 
     def get_require_profile(self) -> bool:
         profile_elem = self.driver.find_element(
-            By.ID, 'required_print_profile'
+            By.ID, 'required_print_profile_0'
         )
         profile: bool = profile_elem.is_selected()
         return profile
 
     def get_require_batching(self) -> bool:
-        batching_elem = self.driver.find_element(By.ID, 'is_batching_required')
+        batching_elem = self.driver.find_element(By.ID, 'is_batching_required_0')  # noqa: E501
         batching: bool = batching_elem.is_selected()
         return batching
 
     def get_require_binning(self) -> bool:
-        binning_elem = self.driver.find_element(By.ID, 'is_binning_required')
+        binning_elem = self.driver.find_element(By.ID, 'is_binning_required_0')
         binning: bool = binning_elem.is_selected()
         return binning
 
     def get_bin_by(self) -> str:
-        by_elem = self.driver.find_element(By.ID, 'product_bin_by')
+        by_elem = self.driver.find_element(By.ID, 'product_bin_by_0')
         by_option = Select(by_elem).first_selected_option
         by: str = by_option.text
         return by
@@ -66,20 +66,20 @@ class ProductCategory(BasePage):
         return total_routes
 
     def get_removal_strategy(self) -> str:
-        strat_elem = self.driver.find_element(By.ID, 'removal_strategy_id')
-        strat: str = strat_elem.get_attribute('value')  # type: ignore
+        strat_elem = self.driver.find_element(By.ID, 'removal_strategy_id_0')
+        strat: str = strat_elem.get_attribute('value')  # type: ignore[ReportAssignment]  # noqa: E501
         return strat
 
     # ============ inventory valuation ============ #
 
     def get_costing_methods(self) -> str:
-        cost_elem = self.driver.find_element(By.ID, 'property_cost_method')
+        cost_elem = self.driver.find_element(By.ID, 'property_cost_method_0')
         cost_option = Select(cost_elem).first_selected_option
         cost: str = cost_option.text
         return cost
 
     def get_valuation(self) -> str:
-        val_elem = self.driver.find_element(By.ID, 'property_valuation')
+        val_elem = self.driver.find_element(By.ID, 'property_valuation_0')
         selected_val = Select(val_elem).first_selected_option
         val: str = selected_val.text
         return val
@@ -87,17 +87,17 @@ class ProductCategory(BasePage):
     # ============ printing details ============ #
 
     def get_print_profile(self) -> str:
-        profile_elem = self.driver.find_element(By.ID, 'print_profile')
-        profile: str = profile_elem.get_attribute('value')   # type: ignore
+        profile_elem = self.driver.find_element(By.ID, 'print_profile_0')
+        profile: str = profile_elem.get_attribute('value')  # type: ignore[ReportAssignment]  # noqa: E501
         return profile
 
     def get_pallet_type(self) -> str:
-        pallet_elem = self.driver.find_element(By.ID, 'pallet_type')
-        pallet: str = pallet_elem.get_attribute('value')  # type: ignore
+        pallet_elem = self.driver.find_element(By.ID, 'pallet_type_0')
+        pallet: str = pallet_elem.get_attribute('value')  # type: ignore[ReportAssignment]  # noqa: E501
         return pallet
 
     def get_file_name(self) -> str:
         # its spelt wrong on the back end so this may fail if they type check
-        file_elem = self.driver.find_element(By.ID, 'artwork_naming_formate')
-        file: str = file_elem.get_attribute('value')  # type: ignore
+        file_elem = self.driver.find_element(By.ID, 'artwork_naming_formate_0')
+        file: str = file_elem.get_attribute('value')  # type: ignore[ReportAssignment]  # noqa: E501
         return file
