@@ -7,7 +7,6 @@ from pages.product_categories import ProductCategory
 from pytest import FixtureRequest
 
 
-# TODO: Port to Odoo 17
 # TODO: decide to decode json
 class TestFinishedProductCategories:
     @pytest.fixture(scope='class')
