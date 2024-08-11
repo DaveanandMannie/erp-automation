@@ -19,7 +19,7 @@ class PackageTypes(BasePage):
         sleep(0.3)
 
     def get_name(self) -> str:
-        name_elem = self.driver.find_element(By.ID, 'name')
+        name_elem = self.driver.find_element(By.ID, 'name_0')
         name: str = name_elem.get_attribute('value')  # type: ignore
         return name
 
@@ -27,15 +27,15 @@ class PackageTypes(BasePage):
         dim_list: list[str] = []
         len_elem: WebElement = self.driver.find_element(
             By.ID,
-            'packaging_length'
+            'packaging_length_0'
         )
         width_elem: WebElement = self.driver.find_element(
             By.ID,
-            'width'
+            'width_0'
         )
         height_elem: WebElement = self.driver.find_element(
             By.ID,
-            'height'
+            'height_0'
         )
 
         length: str = len_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
@@ -49,7 +49,7 @@ class PackageTypes(BasePage):
     def get_weight(self) -> str:
         weight_elem: WebElement = self.driver.find_element(
             By.ID,
-            'base_weight'
+            'base_weight_0'
         )
         weight: str = weight_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
         return weight
@@ -57,7 +57,7 @@ class PackageTypes(BasePage):
     def get_max_weight(self) -> str:
         mweight_elem: WebElement = self.driver.find_element(
             By.ID,
-            'max_weight'
+            'max_weight_0'
         )
         mweight: str = mweight_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
         return mweight
@@ -65,7 +65,7 @@ class PackageTypes(BasePage):
     def get_barcode(self) -> str:
         bar_elem: WebElement = self.driver.find_element(
             By.ID,
-            'barcode'
+            'barcode_0'
         )
         bar: str = bar_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa E501
         return bar
@@ -73,7 +73,7 @@ class PackageTypes(BasePage):
     def get_price(self) -> str:
         price_elem: WebElement = self.driver.find_element(
             By.ID,
-            'price'
+            'price_0'
         )
         price: str = price_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa E501
         return price
@@ -81,7 +81,7 @@ class PackageTypes(BasePage):
     def get_product(self) -> str:
         product_elem: WebElement = self.driver.find_element(
             By.ID,
-            'product_id'
+            'product_id_0'
         )
         product: str = product_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
         return product
@@ -89,7 +89,7 @@ class PackageTypes(BasePage):
     def get_related_to_client(self) -> bool:
         related_elem: WebElement = self.driver.find_element(
             By.ID,
-            'related_to_client_company'
+            'related_to_client_company_0'
         )
         related: bool = related_elem.is_selected()
         return related

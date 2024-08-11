@@ -1,0 +1,17 @@
+{
+    "name": "",
+    "staging_url": "",
+    "production_url": "",
+    "uat_url": "",
+    "dimensions": [],
+    "weight": "",
+    "max_weight": "",
+    "barcode": "",
+    "price": "",
+    "related_to_client": "",
+    "product":"",
+    "companies": [""],
+    "package_rules": [],
+    "product_details": [[""]],
+    "get_storage_cap": [[""]]
+}
