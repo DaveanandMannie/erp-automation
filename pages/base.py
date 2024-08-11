@@ -52,7 +52,7 @@ class BasePage:
         login_button.click()
 
     def login_uat(self):
-        self.driver.get('https://uat.odoo.pirntgeek.ca')
+        self.driver.get('https://uat.odoo.printgeek.ca')
         email_box: WebElement = self.driver.find_element(By.ID, 'login')
         password_box: WebElement = self.driver.find_element(By.ID, 'password')
         login_button: WebElement = self.driver.find_element(
