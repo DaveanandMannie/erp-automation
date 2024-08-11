@@ -3,14 +3,13 @@ from pages.base import BasePage
 from selenium.webdriver.common.by import By
 
 
-# TODO: port to Odoo 17
 class Routes(BasePage):
     def __init__(self, *args):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
     def get_name(self) -> str:
-        name_elem: WebElement = self.driver.find_element(By.ID, 'name')
+        name_elem: WebElement = self.driver.find_element(By.ID, 'name_0')
         name: str = name_elem.get_attribute('value')  # type: ignore
         return name
 
@@ -19,7 +18,7 @@ class Routes(BasePage):
     def get_product_category_bool(self) -> bool:
         cat_elem: WebElement = self.driver.find_element(
             By.ID,
-            'product_categ_selectable'
+            'product_categ_selectable_0'
         )
         selected: bool = cat_elem.is_selected()
         return selected
@@ -27,7 +26,7 @@ class Routes(BasePage):
     def get_products_bool(self) -> bool:
         prods_elem: WebElement = self.driver.find_element(
             By.ID,
-            'product_selectable'
+            'product_selectable_0'
         )
         selected: bool = prods_elem.is_selected()
         return selected
@@ -35,7 +34,7 @@ class Routes(BasePage):
     def get_warehouses_bool(self) -> bool:
         warehouse_elem: WebElement = self.driver.find_element(
             By.ID,
-            'warehouse_selectable'
+            'warehouse_selectable_0'
         )
         selected: bool = warehouse_elem.is_selected()
         return selected
@@ -51,14 +50,14 @@ class Routes(BasePage):
             'span'
         )
         for span in spans:
-            print(span.text)
-            ids.append(span.text)
+            if span.text != '':
+                ids.append(span.text)
         return ids
 
     def get_sales_lines_bool(self) -> bool:
         sales_elem: WebElement = self.driver.find_element(
             By.ID,
-            'sale_selectable'
+            'sale_selectable_0'
         )
         selected: bool = sales_elem.is_selected()
         return selected

@@ -21,8 +21,12 @@ class TestArtworkManifestSettings:
 
         if environment == 'staging':
             page.login_staging()
+
         if environment == 'production':
             page.login_prod()
+
+        if environment == 'uat':
+            page.login_uat()
         return page
 
     @pytest.fixture(
@@ -38,6 +42,9 @@ class TestArtworkManifestSettings:
 
             if environment == 'production':
                 page.navigate(data['production_url'])
+
+            if environment == 'uat':
+                page.navigate(data['uat_url'])
 
             sleep(0.9)
             return data
@@ -68,8 +75,8 @@ class TestArtworkManifestSettings:
         correct_val: str = data['warehouses']
 
         if correct_val == 'True':
-            correct_opt: list = page.opt_get_warehouse_ids()
-            opt: list = data['warehouse_ids']
+            opt: list = page.opt_get_warehouse_ids()
+            correct_opt: list = data['warehouse_ids']
             assert opt == correct_opt, (
                 f'List of warehouses not configured correctly for route: {data['name']}'  # noqa: E501
             )
