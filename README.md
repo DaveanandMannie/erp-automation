@@ -47,7 +47,7 @@ Use ```--tb <length of trace back>``` to adjust the trace back length. All Pytes
 
 Use ```--count <int>``` or ```-c <int>``` To run the test multiple times
 
-Use ```--environment <staging or production>```  or ```-e <staging or production>``` To choose which instance to test on
+Use ```--environment <staging or production or uat>```  or ```-e <staging or production or uat>``` To choose which instance to test on
 
 Use ```--file <test script path>``` or ```-f <test script path>``` To run a specific tests script
 
