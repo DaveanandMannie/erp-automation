@@ -18,7 +18,6 @@ class BasePage:
         self.email = os.getenv('EMAIL')
         self.password = os.getenv('PASS')
 
-        # TODO: handle the move to 17
     def login_staging(self):
         self.driver.get('https://staging.odoo.printgeek.ca')
         email_box: WebElement = self.driver.find_element(By.ID, 'login')
