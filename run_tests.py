@@ -15,7 +15,7 @@ def main():
 
     parser.add_argument(
         '-e', '--environment',
-        choices=['staging', 'production'],
+        choices=['staging', 'production', 'uat'],
         default='staging',
         help='Choose environemnt (default = staging)'
     )
