@@ -3,7 +3,7 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pages.product_category import ProductCategory
+from pages.product_categories import ProductCategory
 from pytest import FixtureRequest
 
 
