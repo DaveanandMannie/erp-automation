@@ -7,6 +7,7 @@ from pages.routes import Routes
 from pytest import FixtureRequest
 
 
+# TODO: Port to Odoo 17
 class TestArtworkManifestSettings:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):

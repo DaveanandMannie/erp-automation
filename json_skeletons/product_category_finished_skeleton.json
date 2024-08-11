@@ -2,6 +2,7 @@
     "name": "",
     "staging_url": "",
     "production_url": "",
+    "uat_url": "",
     "parent_category": "",
     "is_general_category": "",
     "required_pallet": "",

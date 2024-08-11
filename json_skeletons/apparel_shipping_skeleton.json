@@ -2,6 +2,7 @@
     "shipping_method_name": "",
     "staging_url": "",
     "production_url": "",
+    "uat_url": "",
     "provider": "",
     "integration_level": "",
     "related_company_switch": "",

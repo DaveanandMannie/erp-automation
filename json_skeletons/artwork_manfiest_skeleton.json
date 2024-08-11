@@ -1,5 +1,6 @@
 {
     "staging_url":"",
+    "uat_url": "",
     "production_url": "",
     "settings":[]
 }

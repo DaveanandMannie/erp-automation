@@ -3,6 +3,7 @@ from pages.base import BasePage
 from selenium.webdriver.common.by import By
 
 
+# TODO: port to Odoo 17
 class Routes(BasePage):
     def __init__(self, *args):
         super().__init__(*args)

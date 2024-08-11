@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import Select
 from pages.base import BasePage
 
 
+# TODO: port to Odoo 17
 class ProductCategory(BasePage):
     def __init__(self, *args):
         super().__init__(*args)

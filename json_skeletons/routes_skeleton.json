@@ -2,6 +2,7 @@
     "name": "",
     "staging_url": "",
     "production_url": "",
+    "uat_url": "",
     "product_categories":"",
     "products": "",
     "warehouses": "",

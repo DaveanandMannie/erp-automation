@@ -7,6 +7,7 @@ from pages.service_types import ServiceType
 from pytest import FixtureRequest
 
 
+# TODO: Port to Odoo 17
 # TODO: decide to decode json
 class TestFinishedProductCategories:
     @pytest.fixture(scope='class')

@@ -9,6 +9,7 @@ from pytest import FixtureRequest
 
 
 # TODO: add dynamic test name to failure message
+# TODO: add dynamic test name to failure message
 class TestShippingMethods:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
