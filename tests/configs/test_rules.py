@@ -8,7 +8,7 @@ from pages.rules import Rules
 from pytest import FixtureRequest
 
 
-class TestArtworkManifestSettings:
+class TestRules:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """

@@ -9,7 +9,7 @@ from pytest import FixtureRequest
 
 # TODO: Port to Odoo 17
 # TODO: decide to decode json
-class TestFinishedProductCategories:
+class TestServicetypes:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """

@@ -7,8 +7,7 @@ from pages.package_types import PackageTypes
 from pytest import FixtureRequest
 
 
-# TODO: Port to Odoo 17
-class TestArtworkManifestSettings:
+class TestPackageTypes:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """

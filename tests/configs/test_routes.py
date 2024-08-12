@@ -7,7 +7,7 @@ from pages.routes import Routes
 from pytest import FixtureRequest
 
 
-class TestArtworkManifestSettings:
+class TestProductCategories:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
         """ Selenium driver with scraper """
