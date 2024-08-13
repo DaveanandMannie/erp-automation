@@ -8,6 +8,7 @@ from pages.shipping_methods import ShippingMethods
 from pytest import FixtureRequest
 
 
+# TODO: Refact to mulit class to clean stdout
 # TODO: add dynamic test name to failure message
 # TODO: add dynamic test name to failure message
 class TestShippingMethods:
