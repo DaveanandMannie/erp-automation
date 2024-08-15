@@ -26,6 +26,7 @@ automated_tests/
 │       ├── test_artwork_manifest.py
 │       ├── test_product_categories.py
 │       ├── test_routes.py
+│       ├── test_operation_types.py
 │       ├── test_rules.py
 │       ├── package_types.py
 │       ├── test_service_types.py
