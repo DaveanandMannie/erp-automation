@@ -8,7 +8,8 @@ end user behaviour is as expected.
 automated_tests/
 ├── .venv
 ├── json_skeletons/
-│   └── *json templates
+│   └── configs/
+│       └── *json templates
 ├── pages/
 │   ├── base.py
 │   ├── product_cateogory.py
