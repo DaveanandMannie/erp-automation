@@ -7,7 +7,6 @@ from pages.service_types import ServiceType
 from pytest import FixtureRequest
 
 
-# TODO: Port to Odoo 17
 # TODO: decide to decode json
 class TestServicetypes:
     @pytest.fixture(scope='class')
@@ -22,13 +21,17 @@ class TestServicetypes:
 
         if environment == 'staging':
             page.login_staging()
+
         if environment == 'production':
             page.login_prod()
+
+        if environment == 'uat':
+            page.login_uat()
         return page
 
     @pytest.fixture(
         scope='class',
-        params=glob('testcases_json/configs/service_types/*.json')
+        params=glob('testcases_json/configs/service_types/odoo_17/*.json')
     )
     def data(self, request: FixtureRequest, page: ServiceType, environment: str):  # noqa: E501
         """Paramitize for multiple json test cases"""
@@ -40,27 +43,15 @@ class TestServicetypes:
             if environment == 'production':
                 page.navigate(data['production_url'])
 
+            if environment == 'uat':
+                page.navigate(data['uat_url'])
+
             sleep(0.5)
             return data
 
     # ============= Tests ============= #
 
-    def test_name(self, page: ServiceType, data: dict):
-        correct_name: str = data['name']
-        name: str = page.get_name()
-        assert name == correct_name, f'Name not configured correctly:{data['name']}'  # noqa: E501
-
-    def test_code(self, page: ServiceType, data: dict):
-        correct_code: str = data['code']
-        code: str = page.get_code()
-        assert code == correct_code, f'Code not configured correctly:{data['name']}'  # noqa: E501
-
-    def test_look_up(self, page: ServiceType, data: dict):
-        correct_look_up: str = data['look_up']
-        look_up: str = page.get_look_up()
-        assert look_up == correct_look_up, f'Look Up not configured correctly:{data['name']}'  # noqa: E501
-
-    def test_provider(self, page: ServiceType, data: dict):
-        correct_provider: str = data['provider']
-        provider: str = page.get_provider()
-        assert provider == correct_provider, f'Provider not configured correctly:{data['name']}'  # noqa: E501
+    def test_entire_page(self, page: ServiceType, data: dict):
+        correct_val: list[list[str]] = data['struct']
+        val: list[list[str]] = page.get_service_struct()
+        assert val == correct_val, '1 or more service types are incorrect'
