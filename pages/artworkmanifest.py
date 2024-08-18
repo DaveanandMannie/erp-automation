@@ -12,18 +12,15 @@ class ManifestSettings(BasePage):
     def navigate_settings_location(self):
         settings_tab: WebElement = self.driver.find_element(
             By.CSS_SELECTOR,
-            "div.tab[data-key='mrp'] span.app_name"
+            '[data-key="mrp"]'
         )
         settings_tab.click()
         return
 
-    def get_manifest_fields(self) -> list:
-        field_list: list = []
+    def get_manifest_fields(self) -> list[str]:
         list_div: WebElement = self.driver.find_element(
             By.NAME,
             'artwork_field_ids'
         )
-        spans: list[WebElement] = list_div.find_elements(By.TAG_NAME, 'span')
-        for span in spans:
-            field_list.append(span.get_attribute('title'))
+        field_list: list[str] = list_div.text.split('\n')
         return field_list
