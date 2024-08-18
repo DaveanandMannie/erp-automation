@@ -4,7 +4,6 @@ from time import sleep
 from pages.base import BasePage
 
 
-# TODO: port to Odoo 17
 class PackageTypes(BasePage):
     def __init__(self, *args):
         super().__init__(*args)
