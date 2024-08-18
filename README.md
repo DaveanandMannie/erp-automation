@@ -21,7 +21,8 @@ automated_tests/
 │   └── shipping_methods.py
 ├── testcases_json/
 │   └── configs/
-│       └── *live json test data
+│       └── specific dirs/
+│           └── *json data
 ├── tests/
 │   └── configs/
 │       ├── test_artwork_manifest.py

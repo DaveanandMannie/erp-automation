@@ -5,10 +5,14 @@
     "uat_url": "",
     "provider": "",
     "integration_level": "",
+    "routes": "",
+    "margin": "",
+    "additional_margin": "",
+    "free_order_amount": "",
+    "delivery_product":"",
+    "invoice_policy": "",
     "related_company_switch": "",
     "related_company_list": [""],
-    "delivery_product":"",
-    "product_category": "",
     "country_list": [""],
     "state_list": [""],
     "zip_prefix_list": [""],
@@ -28,6 +32,5 @@
     "promo_code": "",
     "method_of_payments": "",
     "on_behalf_of": "",
-    "included_attributes": [""],
     "excluded_attributes": [""]
 }

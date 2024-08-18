@@ -2,7 +2,6 @@ import json
 from glob import glob
 from time import sleep
 
-
 import pytest
 from pages.shipping_methods import ShippingMethods
 from pytest import FixtureRequest
@@ -22,8 +21,13 @@ class TestParcel:
 
         if environment == 'staging':
             page.login_staging()
+
         if environment == 'production':
             page.login_prod()
+
+        if environment == 'uat':
+            page.login_uat()
+
         return page
 
     @pytest.fixture(
@@ -40,6 +44,9 @@ class TestParcel:
             if environment == 'production':
                 page.navigate(data['production_url'])
 
+            if environment == 'uat':
+                page.navigate(data['uat_url'])
+
             sleep(0.5)
             return data
 
@@ -53,7 +60,6 @@ class TestParcel:
         )
 
     def test_provider(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_destination()
         correct_provider: str = data['provider']
         provider = page.get_shipping_provider()
 
@@ -61,26 +67,46 @@ class TestParcel:
                 'The shipping provider is incorrect'
         )
 
+    def test_routes(self, page: ShippingMethods, data: dict):
+        correct_routes: str = data['routes']
+        routes: str | None = page.get_routes()
+        assert routes == correct_routes, 'The routes is incorrect'
+
+    def test_margin_rate(self, page: ShippingMethods, data: dict):
+        correct_rate: str = data['margin']
+        rate: str | None = page.get_margin()
+        assert rate == correct_rate, 'The Margin on Rate is incorrect'
+
+    def test_add_margin(self, page: ShippingMethods, data: dict):
+        correct_add: str = data['additional_margin']
+        add: str | None = page.get_add_margin()
+        assert add == correct_add, 'Additional Margin is incorrect'
+
+    def test_delivery_product(self, page: ShippingMethods, data: dict):
+        correct_product: str = data['delivery_product']
+        product: str | None = page.get_delivery_product()
+        assert product == correct_product, (
+            'Delivery Product is not configured correctly'
+        )
+
+    def test_invoicing_policy(self, page: ShippingMethods, data: dict):
+        correct_val: str = data['invoice_policy']
+        val: str | None = page.get_invoice_policy()
+        assert val == correct_val, 'Invoicing policy is inccoret'
+
     def test_related_company(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
         correct_state: str = data['related_company_switch']
         state: str = str(page.get_related_company())
         assert state == correct_state, 'Related to companies is not on'
+        if correct_state:
+            correct_list: list = data['related_company_list']
+            companies: list = page.opt_company_names()
+            assert companies == correct_list, (
+                'The list of companies is not equal configured correctly'
+            )
 
-    def test_company_names(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_destination()
-        correct_list: list = data['related_company_list']
-        companies: list = page.get_company_names()
-        assert companies == correct_list, (
-            'The list of companies is not equal configured correctly'
-        )
-
-    def test_delivery_product(self, page: ShippingMethods, data: dict):
-        correct_product: str = data['delivery_product']
-        product: str = page.get_delivery_product()
-        assert product == correct_product, (
-            'Delivery Product is not configured correctly'
-        )
+    # =============== Destination Availability=============== #
 
     def test_countries(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
@@ -110,7 +136,7 @@ class TestParcel:
     def test_default_weight(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_default: str = data['default_weight']
-        default: str = page.get_default_weight()
+        default: str | None = page.get_default_weight()
         assert default == correct_default, (
                 'the default weight is not configured correctly'
         )
@@ -118,7 +144,7 @@ class TestParcel:
     def test_shipping_uom(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_uom: str = data['shipping_uom']
-        uom: str = page.get_shipping_uom()
+        uom: str | None = page.get_shipping_uom()
         assert uom == correct_uom, (
                 'The shipping unit of measure is not configured correctly'
         )
@@ -126,7 +152,7 @@ class TestParcel:
     def test_packaging(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_package: str = data['packaging']
-        package: str = page.get_packaging()
+        package: str | None = page.get_packaging()
         assert package == correct_package, (
                 'The packaging is not configured correctly'
         )
@@ -139,7 +165,7 @@ class TestParcel:
 
     def test_service_type(self, page: ShippingMethods, data: dict):
         correct_service: str = data['service_type']
-        service: str = page.get_service_type()
+        service: str | None = page.get_service_type()
         assert service == correct_service, (
                 'Service type was not configured correctly'
         )
@@ -147,7 +173,7 @@ class TestParcel:
     def test_service_option(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_option: str = data['desired_option']
-        option: str = page.get_service_option()
+        option: str | None = page.get_service_option()
         assert option == correct_option, (
                 'Option type was not configured correctly'
         )
@@ -163,7 +189,7 @@ class TestParcel:
     def test_customer_num(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_num: str = data['customer_number']
-        num: str = page.get_customer_number()
+        num: str | None = page.get_customer_number()
         assert num == correct_num, (
                 'Customer number is not configured correctly'
         )
@@ -171,7 +197,7 @@ class TestParcel:
     def test_contract_id(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_contract: str = data['contract_id']
-        contract: str = page.get_contract_id()
+        contract: str | None = page.get_contract_id()
         assert contract == correct_contract, (
                 'Contract number is not configured correctly'
         )
@@ -179,13 +205,13 @@ class TestParcel:
     def test_promo(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_promo: str = data['promo_code']
-        promo: str = page.get_promo_code()
+        promo: str | None = page.get_promo_code()
         assert promo == correct_promo, 'Promo code is not configured correctly'
 
     def test_payment_method(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_method: str = data['method_of_payments']
-        method: str = page.get_payment_method()
+        method: str | None = page.get_payment_method()
         assert method == correct_method, (
                 'Method of payment is not configured correctly'
         )
@@ -193,55 +219,42 @@ class TestParcel:
     def test_on_behalf(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_behalf: str = data['on_behalf_of']
-        behalf: str = page.get_mailed_on_behalf()
+        behalf: str | None = page.get_mailed_on_behalf()
         assert behalf == correct_behalf, (
                 'Mailed on behalf of is not configured correctly'
         )
 
     # ==================Credential Tab(s)================== #
     def test_canpost_tests_user(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_canpost_credentials()
+        page.navigate_tab_credentials()
         correct_user: str = data['test_username']
-        user: str = page.get_canpost_dev_username()
+        user: str | None = page.get_dev_username()
         assert user == correct_user, (
             'Canada Post staging username is not configured correctly'
         )
 
     def test_canpost_tests_pass(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_canpost_credentials()
+        page.navigate_tab_credentials()
         correct_pass: str = data['test_password']
-        password: str = page.get_canpost_dev_password()
+        password: str | None = page.get_dev_password()
         assert password == correct_pass, (
             'Canada Post staging password is not configured correctly'
         )
 
     def test_canpost_prod_user(self, page: ShippingMethods, data: dict):
         correct_user: str = data['production_username']
-        user: str = page.get_canpost_prod_username()
+        user: str | None = page.get_prod_username()
         assert user == correct_user, (
             'Canada Post production username is not configured correctly'
         )
 
     def test_canpost_prod_pass(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_canpost_credentials()
+        page.navigate_tab_credentials()
         correct_pass: str = data['production_password']
-        password: str = page.get_canpost_prod_password()
+        password: str | None = page.get_prod_password()
         assert password == correct_pass, (
             'Canada Post production password is not configured correctly'
         )
-
-    # ==================Product Attrib Tab================== #
-    # This is "To be deperecated"
-#    def test_included_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
-#        if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
-#            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
-#
-#        page.navigate_tab_product_attrib()
-#        correct_include: list = data['included_attributes']
-#        include: list = page.get_included_attribs()
-#       assert include == correct_include, (
-#               'Included attributes are not configured correctly'
-#        )
 
     def test_excluded_attrib(self, page: ShippingMethods, data: dict):
         page.navigate_tab_product_attrib()
@@ -265,8 +278,13 @@ class TestLetterMail:
 
         if environment == 'staging':
             page.login_staging()
+
         if environment == 'production':
             page.login_prod()
+
+        if environment == 'uat':
+            page.login_uat()
+
         return page
 
     @pytest.fixture(
@@ -283,13 +301,15 @@ class TestLetterMail:
             if environment == 'production':
                 page.navigate(data['production_url'])
 
+            if environment == 'uat':
+                page.navigate(data['uat_url'])
+
             sleep(0.5)
             return data
 
     # ============= Tests ============= #
 
     def test_name(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_destination()
         correct_name: str = data['shipping_method_name']
         name = page.get_name()
         assert name == correct_name, (
@@ -297,37 +317,51 @@ class TestLetterMail:
         )
 
     def test_provider(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_destination()
         correct_provider: str = data['provider']
         provider = page.get_shipping_provider()
-
-        if 'Letter Mail' in data['shipping_method_name']:
-            provider = provider.replace('_', ' ').title()
         assert provider == correct_provider, (
                 'The shipping provider is incorrect'
         )
 
-    def test_related_company(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_destination()
-        correct_state: str = data['related_company_switch']
-        state: str = str(page.get_related_company())
-        assert state == correct_state, 'Related to companies is not on'
+    def test_routes(self, page: ShippingMethods, data: dict):
+        correct_routes: str = data['routes']
+        routes: str | None = page.get_routes()
+        assert routes == correct_routes, 'The routes is incorrect'
 
-    def test_company_names(self, page: ShippingMethods, data: dict):
-        page.navigate_tab_destination()
-        correct_list: list = data['related_company_list']
-        companies: list = page.get_company_names()
-        assert companies == correct_list, (
-            'The list of companies is not equal configured correctly'
-        )
+    def test_margin_rate(self, page: ShippingMethods, data: dict):
+        correct_rate: str = data['margin']
+        rate: str | None = page.get_margin()
+        assert rate == correct_rate, 'The Margin on Rate is incorrect'
+
+    def test_add_margin(self, page: ShippingMethods, data: dict):
+        correct_add: str = data['additional_margin']
+        add: str | None = page.get_add_margin()
+        assert add == correct_add, 'Additional Margin is incorrect'
+
+    def test_product_category(self, page: ShippingMethods, data: dict):
+        correct_val: str = data['product_category']
+        val: str | None = page.get_product_category()
+        assert val == correct_val, 'Product category is incorrect'
 
     def test_delivery_product(self, page: ShippingMethods, data: dict):
         correct_product: str = data['delivery_product']
-        product: str = page.get_delivery_product()
+        product: str | None = page.get_delivery_product()
         assert product == correct_product, (
             'Delivery Product is not configured correctly'
         )
 
+    def test_related_company(self, page: ShippingMethods, data: dict):
+        correct_state: str = data['related_company_switch']
+        state: str = str(page.get_related_company())
+        assert state == correct_state, 'Related to companies is not on'
+        if correct_state:
+            correct_list: list = data['related_company_list']
+            companies: list = page.opt_company_names()
+            assert companies == correct_list, (
+                'The list of companies is not equal configured correctly'
+            )
+
+    # =============== Destination Availability=============== #
     def test_countries(self, page: ShippingMethods, data: dict):
         page.navigate_tab_destination()
         correct_countries: list = data['country_list']
@@ -356,7 +390,7 @@ class TestLetterMail:
     def test_default_weight(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_default: str = data['default_weight']
-        default: str = page.get_default_weight()
+        default: str | None = page.get_default_weight()
         assert default == correct_default, (
                 'the default weight is not configured correctly'
         )
@@ -364,7 +398,7 @@ class TestLetterMail:
     def test_shipping_uom(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_uom: str = data['shipping_uom']
-        uom: str = page.get_shipping_uom()
+        uom: str | None = page.get_shipping_uom()
         assert uom == correct_uom, (
                 'The shipping unit of measure is not configured correctly'
         )
@@ -372,7 +406,7 @@ class TestLetterMail:
     def test_packaging(self, page: ShippingMethods, data: dict):
         page.navigate_tab_extra()
         correct_package: str = data['packaging']
-        package: str = page.get_packaging()
+        package: str | None = page.get_packaging()
         assert package == correct_package, (
                 'The packaging is not configured correctly'
         )
@@ -385,24 +419,36 @@ class TestLetterMail:
 
     def test_service_type(self, page: ShippingMethods, data: dict):
         correct_service: str = data['service_type']
-        service: str = page.get_service_type()
+        service: str | None = page.get_service_type()
         assert service == correct_service, (
                 'Service type was not configured correctly'
         )
 
-    # ==================Product Attrib Tab================== #
-    # This is "To be deperecated"
-#    def test_included_attrib(self, page: ShippingMethods, data: dict, environment: str):  # noqa: E501
-#        if environment == 'production' and 'Letter Mail' in data['shipping_method_name']:  # noqa: E501
-#            pytest.skip('REMOVE ONCE PROD IS UPGRADED')
-#
-#        page.navigate_tab_product_attrib()
-#        correct_include: list = data['included_attributes']
-#        include: list = page.get_included_attribs()
-#       assert include == correct_include, (
-#               'Included attributes are not configured correctly'
-#        )
+    def test_contract_id(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_extra()
+        correct_contract: str = data['contract_id']
+        contract: str | None = page.get_contract_id()
+        assert contract == correct_contract, (
+                'Contract number is not configured correctly'
+        )
 
+    def test_payment_method(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_extra()
+        correct_method: str = data['method_of_payments']
+        method: str | None = page.get_payment_method()
+        assert method == correct_method, (
+                'Method of payment is not configured correctly'
+        )
+
+    def test_on_behalf(self, page: ShippingMethods, data: dict):
+        page.navigate_tab_extra()
+        correct_behalf: str = data['on_behalf_of']
+        behalf: str | None = page.get_mailed_on_behalf()
+        assert behalf == correct_behalf, (
+                'Mailed on behalf of is not configured correctly'
+        )
+
+    # ==================Product Attrib Tab================== #
     def test_excluded_attrib(self, page: ShippingMethods, data: dict):
         page.navigate_tab_product_attrib()
         correct_exclude: list = data['excluded_attributes']
