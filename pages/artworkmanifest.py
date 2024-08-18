@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 
-# TODO: port to Odoo 17
 class ManifestSettings(BasePage):
     def __init__(self, *args):
         super().__init__(*args)
