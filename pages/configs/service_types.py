@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
-from pages.configs.base import BasePage
+from pages.base import BasePage
 
 
 # TODO: Rethink all life choices until this point in time

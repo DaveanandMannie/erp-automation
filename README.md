@@ -11,8 +11,8 @@ automated_tests/
 │   └── configs/
 │       └── *json templates
 ├── pages/
+│   ├── base.py
 │   └── configs/
-│       ├── base.py
 │       ├── product_cateogory.py
 │       ├── service_types.py
 │       ├── routes.py
