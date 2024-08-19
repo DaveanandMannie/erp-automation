@@ -11,14 +11,15 @@ automated_tests/
 │   └── configs/
 │       └── *json templates
 ├── pages/
-│   ├── base.py
-│   ├── product_cateogory.py
-│   ├── service_types.py
-│   ├── routes.py
-│   ├── rules.py
-│   ├── package_types.py
-│   ├── artworkmanifest.py
-│   └── shipping_methods.py
+│   └── configs/
+│       ├── base.py
+│       ├── product_cateogory.py
+│       ├── service_types.py
+│       ├── routes.py
+│       ├── rules.py
+│       ├── package_types.py
+│       ├── artworkmanifest.py
+│       └── shipping_methods.py
 ├── testcases_json/
 │   └── configs/
 │       └── specific dirs/

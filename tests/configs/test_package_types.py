@@ -3,7 +3,7 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pages.package_types import PackageTypes
+from pages.configs.package_types import PackageTypes
 from pytest import FixtureRequest
 
 

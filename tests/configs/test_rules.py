@@ -4,7 +4,7 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pages.rules import Rules
+from pages.configs.rules import Rules
 from pytest import FixtureRequest
 
 

@@ -3,7 +3,7 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pages.shipping_methods import ShippingMethods
+from pages.configs.shipping_methods import ShippingMethods
 from pytest import FixtureRequest
 
 

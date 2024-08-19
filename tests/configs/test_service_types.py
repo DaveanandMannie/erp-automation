@@ -3,7 +3,7 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pages.service_types import ServiceType
+from pages.configs.service_types import ServiceType
 from pytest import FixtureRequest
 
 

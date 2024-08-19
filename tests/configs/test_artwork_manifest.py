@@ -3,7 +3,7 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pages.artworkmanifest import ManifestSettings
+from pages.configs.artworkmanifest import ManifestSettings
 from pytest import FixtureRequest
 
 

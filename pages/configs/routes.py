@@ -1,6 +1,7 @@
-from selenium.webdriver.remote.webelement import WebElement
-from pages.base import BasePage
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+
+from pages.configs.base import BasePage
 
 
 class Routes(BasePage):

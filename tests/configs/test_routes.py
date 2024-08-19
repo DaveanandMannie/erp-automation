@@ -3,7 +3,7 @@ from glob import glob
 from time import sleep
 
 import pytest
-from pages.routes import Routes
+from pages.configs.routes import Routes
 from pytest import FixtureRequest
 
 
