@@ -36,6 +36,7 @@ automated_tests/
 │       └── test_shipping_methods.py
 ├── README.md
 ├── conftest.py
+├── pyrightconfig.json
 ├── run_tests.py
 └── requirements.txt
 ```
