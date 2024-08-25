@@ -29,7 +29,7 @@ class SaleOrder(BasePage):
         )
         return elem
 
-    def _wait_visibility(self, find_args: tuple[str, str] = (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')):# noqa: E501
+    def _wait_visibility(self, find_args: tuple[str, str] = (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')):  # noqa: E501
         """
         A wrapper func for wait -> visibility of element located
         Default: (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')
@@ -90,40 +90,38 @@ class SaleOrder(BasePage):
 
     # ============== setting orderlines ============== #
 
+    def _get_row(self, key: str, index: int = 0) -> WebElement:
+        table_div: WebElement = self.driver.find_element(By.NAME, key)
+        table: WebElement = table_div.find_element(By.TAG_NAME, 'tbody')
+        rows: list[WebElement] = table.find_elements(By.TAG_NAME, 'tr')
+        return rows[index]
+
     def _set_details(self):
         """Sets printing details for an order line"""
-        def _get_row(index: int = 0) -> WebElement:
-            table_div: WebElement = self.driver.find_element(
-                By.NAME, 'printing_details_ids'
-            )
-            table: WebElement = table_div.find_element(By.TAG_NAME, 'tbody')
-            rows: list[WebElement] = table.find_elements(By.TAG_NAME, 'tr')
-            return rows[index]
-
         self.driver.find_element(By.LINK_TEXT, 'Add a line').click()
-        row: WebElement = _get_row()
+        row: WebElement = self._get_row('printing_details_ids')
 
         row.find_element(By.NAME, 'location').find_element(
             By.TAG_NAME, 'input').send_keys('FR')
+        _ = self._wait_visibility()
+        row.find_element(By.LINK_TEXT, 'FR').click()
+        _ = self._wait_invisibility()
 
-        # row.find_element(By.NAME, 'offset_x').find_elem
+        x_offset: WebElement = row.find_element(
+            By.NAME, 'offset_x').find_element(By.TAG_NAME, 'input')
+        x_offset.send_keys('-1')
+        x_offset.send_keys(Keys.RETURN)
 
     def _add_products(self, products: list[str]):
         """Adds product from a list of products"""
-        # save_button: WebElement = self.driver.find_element(
-        #     By.CLASS_NAME, 'o_form_button_save'
-        # )
-        def _get_row(index: int) -> WebElement:
-            table_div: WebElement = self.driver.find_element(
-                By.NAME, 'order_line'
-            )
-            table: WebElement = table_div.find_element(By.TAG_NAME, 'tbody')
-            rows: list[WebElement] = table.find_elements(By.TAG_NAME, 'tr')
-            return rows[index]
+        save_button: WebElement = self.driver.find_element(
+            By.CLASS_NAME, 'o_form_button_save'
+        )
+        row: WebElement
 
         # TODO: this is hell
         for index, product in enumerate(products):
-            row: WebElement = _get_row(index)
+            row = self._get_row('order_line', index)
             row.find_element(By.LINK_TEXT, 'Add a product').click()
 
             product_div: WebElement = self._wait_visibility(
@@ -173,14 +171,14 @@ class SaleOrder(BasePage):
             ).find_element(By.CLASS_NAME, 'o_row_draggable').click()
 
             _ = self._wait_invisibility((By.CLASS_NAME, 'o_technical_modal'))
-            # save_button.click()
-            # WebDriverWait(self.driver, 3).until(
-            #     EC.invisibility_of_element_located(save_button)
-            # )
-            #
-            # row: WebElement = _get_row(index)
-            # row.find_element(By.NAME, 'printing_details').click()
-            # self._set_details()
+
+            save_button.click()
+
+            _ = self._wait_invisibility(save_button)
+            row = self._get_row('order_line', index)
+            row.find_element(By.NAME, 'printing_details').click()
+            _ = self._wait_invisibility()
+            self._set_details()
 
     def create_sale_order(
         self,
