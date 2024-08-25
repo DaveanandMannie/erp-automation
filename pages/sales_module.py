@@ -1,7 +1,7 @@
 # TODO: INSTEAD OF RELYING ON AUTO COMPLUTE USE THE LINK TEXT
 
-# pyright: reportUnknownMemberType=false
 from time import sleep
+
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -19,9 +19,7 @@ class SaleOrder(BasePage):
         self.driver.implicitly_wait(5)
         self.actions: ActionChains = ActionChains(self.driver)
 
-    def _wait_invisibility(
-            self,
-            find_args: tuple[str, str] | WebElement = (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')):  # noqa: E501
+    def _wait_invisibility(self, find_args: tuple[str, str] | WebElement = (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')):  # noqa: E501
         """
         A wrapper func for wait -> invisibility of element located
         Default: (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')
@@ -31,10 +29,7 @@ class SaleOrder(BasePage):
         )
         return elem
 
-    def _wait_visibility(
-        self,
-        find_args: tuple[str, str] = (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')  # noqa: E501
-    ):
+    def _wait_visibility(self, find_args: tuple[str, str] = (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')):# noqa: E501
         """
         A wrapper func for wait -> visibility of element located
         Default: (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')

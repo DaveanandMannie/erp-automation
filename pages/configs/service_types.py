@@ -6,7 +6,7 @@ from pages.base import BasePage
 
 # TODO: Rethink all life choices until this point in time
 class ServiceType(BasePage):
-    def __init__(self, *args):
+    def __init__(self, *args: str):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 

@@ -6,7 +6,7 @@ from pages.base import BasePage
 
 
 class ProductCategory(BasePage):
-    def __init__(self, *args):
+    def __init__(self, *args: str):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
@@ -78,12 +78,12 @@ class ProductCategory(BasePage):
         routes: list[str] = routes_elem.text.split('\n')
         return routes
 
-    def get_total_routes(self) -> list:
+    def get_total_routes(self) -> list[str]:
         total_elem: WebElement = self.driver.find_element(
             By.NAME,
             'total_route_ids'
         )
-        total_routes: list = total_elem.text.split('\n')
+        total_routes: list[str] = total_elem.text.split('\n')
         return total_routes
 
     def get_removal_strategy(self) -> str | None:

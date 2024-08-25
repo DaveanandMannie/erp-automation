@@ -6,7 +6,7 @@ from pages.base import BasePage
 
 
 class ShippingMethods(BasePage):
-    def __init__(self, *args):
+    def __init__(self, *args: str):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
@@ -37,9 +37,9 @@ class ShippingMethods(BasePage):
 
 # =============== Regular page =============== #
 
-    def get_name(self) -> str:
+    def get_name(self) -> str | None:
         name_elem: WebElement = self.driver.find_element(By.ID, 'name_0')
-        name: str = name_elem.get_attribute('value')  # type: ignore
+        name: str | None = name_elem.get_attribute('value')
         return name
 
     def get_shipping_provider(self) -> str:
@@ -171,12 +171,12 @@ class ShippingMethods(BasePage):
         state_list: list[str] = state_badges.text.split('\n')
         return state_list
 
-    def get_zip_prefix(self) -> list:
+    def get_zip_prefix(self) -> list[str]:
         zip_badges: WebElement = self.driver.find_element(
             By.NAME,
             'zip_prefix_ids'
         )
-        prefix_list: list = zip_badges.text.split('\n')
+        prefix_list: list[str] = zip_badges.text.split('\n')
         return prefix_list
 
 # =============== Credential =============== #

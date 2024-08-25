@@ -1,0 +1,8 @@
+{
+    "reportUnknownMemberType": false,
+    "exclude": [
+        ".venv/",
+        "**/__pycache__",
+        "**__init__"
+    ]
+}

@@ -7,7 +7,7 @@ from pages.base import BasePage
 
 
 class PackageTypes(BasePage):
-    def __init__(self, *args):
+    def __init__(self, *args: str):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
@@ -19,13 +19,13 @@ class PackageTypes(BasePage):
         tab_elem.click()
         sleep(0.3)
 
-    def get_name(self) -> str:
+    def get_name(self) -> str | None:
         name_elem = self.driver.find_element(By.ID, 'name_0')
-        name: str = name_elem.get_attribute('value')  # type: ignore
+        name: str | None = name_elem.get_attribute('value')
         return name
 
-    def get_dimensions(self) -> list[str]:
-        dim_list: list[str] = []
+    def get_dimensions(self) -> list[str | None]:
+        dim_list: list[str | None] = []
         len_elem: WebElement = self.driver.find_element(
             By.ID,
             'packaging_length_0'
@@ -39,52 +39,52 @@ class PackageTypes(BasePage):
             'height_0'
         )
 
-        length: str = len_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
-        width: str = width_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
-        height: str = height_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
+        length: str | None = len_elem.get_attribute('value')
+        width: str | None = width_elem.get_attribute('value')
+        height: str | None = height_elem.get_attribute('value')
         dim_list.append(length)
         dim_list.append(width)
         dim_list.append(height)
         return dim_list
 
-    def get_weight(self) -> str:
+    def get_weight(self) -> str | None:
         weight_elem: WebElement = self.driver.find_element(
             By.ID,
             'base_weight_0'
         )
-        weight: str = weight_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
+        weight: str | None = weight_elem.get_attribute('value')
         return weight
 
-    def get_max_weight(self) -> str:
+    def get_max_weight(self) -> str | None:
         mweight_elem: WebElement = self.driver.find_element(
             By.ID,
             'max_weight_0'
         )
-        mweight: str = mweight_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
+        mweight: str | None = mweight_elem.get_attribute('value')
         return mweight
 
-    def get_barcode(self) -> str:
+    def get_barcode(self) -> str | None:
         bar_elem: WebElement = self.driver.find_element(
             By.ID,
             'barcode_0'
         )
-        bar: str = bar_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa E501
+        bar: str | None = bar_elem.get_attribute('value')
         return bar
 
-    def get_price(self) -> str:
+    def get_price(self) -> str | None:
         price_elem: WebElement = self.driver.find_element(
             By.ID,
             'price_0'
         )
-        price: str = price_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa E501
+        price: str | None = price_elem.get_attribute('value')
         return price
 
-    def get_product(self) -> str:
+    def get_product(self) -> str | None:
         product_elem: WebElement = self.driver.find_element(
             By.ID,
             'product_id_0'
         )
-        product: str = product_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa: E501
+        product: str | None = product_elem.get_attribute('value')
         return product
 
     def get_related_to_client(self) -> bool:
@@ -97,7 +97,10 @@ class PackageTypes(BasePage):
 
     def opt_get_companies(self) -> list[str]:
         company_list: list[str] = []
-        table_div: WebElement = self.driver.find_element(By.NAME, 'client_company_ids')  # noqa: E501
+        table_div: WebElement = self.driver.find_element(
+            By.NAME,
+            'client_company_ids'
+        )
         table_elem: WebElement = table_div.find_element(By.TAG_NAME, 'tbody')
         rows: list[WebElement] = table_elem.find_elements(By.TAG_NAME, 'tr')
         for row in rows:
@@ -114,8 +117,8 @@ class PackageTypes(BasePage):
 
         return company_list
 
-    def get_package_rules(self) -> list[list]:
-        rules: list[list] = []
+    def get_package_rules(self) -> list[list[str]]:
+        rules: list[list[str]] = []
         table_div: WebElement = self.driver.find_element(
             By.NAME,
             'stock_package_rule_ids'
@@ -148,9 +151,9 @@ class PackageTypes(BasePage):
 
         return rules
 
-    def get_product_details(self) -> list[list]:
+    def get_product_details(self) -> None:
         self._nav_product_tab()
         raise NotImplementedError
 
-    def get_storage_cap(self) -> list[list]:
+    def get_storage_cap(self) -> None:
         raise NotImplementedError

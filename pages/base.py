@@ -9,8 +9,8 @@ from selenium.webdriver.remote.webelement import WebElement
 
 class BasePage:
     # TODO: decide weather or not to use cookies for auth
-    def __init__(self, *args):
-        load_dotenv()
+    def __init__(self, *args: str):
+        _ = load_dotenv()
         self.chrom_opts = Options()
         for arg in args:
             self.chrom_opts.add_argument(arg)

@@ -6,7 +6,7 @@ from pages.base import BasePage
 
 
 class OperationType(BasePage):
-    def __init__(self, *args):
+    def __init__(self, *args: str):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
@@ -29,9 +29,9 @@ class OperationType(BasePage):
         tab_elem: WebElement = self.driver.find_element(By.NAME, 'barcode_app')
         tab_elem.click()
 
-    def get_name(self) -> str:
+    def get_name(self) -> str | None:
         name_elem: WebElement = self.driver.find_element(By.ID, 'name_0')
-        name: str = name_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa:E501
+        name: str | None = name_elem.get_attribute('value')
         return name
 
     # ============ General Tab ============ #
@@ -40,33 +40,33 @@ class OperationType(BasePage):
         opt: str = Select(type_elem).first_selected_option.text
         return opt
 
-    def get_seq_prefix(self) -> str:
+    def get_seq_prefix(self) -> str | None:
         pre_elem: WebElement = self.driver.find_element(
             By.ID,
             'sequence_code_0'
         )
-        pre: str = pre_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa:E501
+        pre: str | None = pre_elem.get_attribute('value')
         return pre
 
-    def get_barcode(self) -> str:
+    def get_barcode(self) -> str | None:
         bar_elem: WebElement = self.driver.find_element(By.ID, 'barcode_0')
-        bar: str = bar_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa:E501
+        bar: str | None = bar_elem.get_attribute('value')
         return bar
 
-    def get_returns_type(self) -> str:
+    def get_returns_type(self) -> str | None:
         ret_elem: WebElement = self.driver.find_element(
             By.ID,
             'return_picking_type_id_0'
         )
-        ret: str = ret_elem.get_attribute('value')  # type: ignore[AssignmentReport] # noqa: E501
+        ret: str | None = ret_elem.get_attribute('value')
         return ret
 
-    def get_def_return(self) -> str:
+    def get_def_return(self) -> str | None:
         ret_elem: WebElement = self.driver.find_element(
             By.ID,
             'default_location_return_id_0'
         )
-        ret: str = ret_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa:E501
+        ret: str | None = ret_elem.get_attribute('value')
         return ret
 
     def get_create_backorder(self) -> str:
@@ -85,20 +85,20 @@ class OperationType(BasePage):
         move: bool = move_elem.is_selected()
         return move
 
-    def get_def_src(self) -> str:
+    def get_def_src(self) -> str | None:
         src_elem: WebElement = self.driver.find_element(
             By.ID,
             'default_location_src_id_0'
         )
-        src: str = src_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa:E501
+        src: str | None = src_elem.get_attribute('value')
         return src
 
-    def get_def_des(self) -> str:
+    def get_def_des(self) -> str | None:
         des_elem: WebElement = self.driver.find_element(
             By.ID,
             'default_location_dest_id_0'
         )
-        des: str = des_elem.get_attribute('value')  # type: ignore[AssignmentReport]  # noqa:E501
+        des: str | None = des_elem.get_attribute('value')
         return des
 
     def get_auto_batch(self) -> bool:

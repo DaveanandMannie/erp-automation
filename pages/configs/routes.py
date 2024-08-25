@@ -5,13 +5,13 @@ from pages.base import BasePage
 
 
 class Routes(BasePage):
-    def __init__(self, *args):
+    def __init__(self, *args: str):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
-    def get_name(self) -> str:
+    def get_name(self) -> str | None:
         name_elem: WebElement = self.driver.find_element(By.ID, 'name_0')
-        name: str = name_elem.get_attribute('value')  # type: ignore
+        name: str | None = name_elem.get_attribute('value')
         return name
 
 # ============= applicable on ============== #
@@ -40,7 +40,7 @@ class Routes(BasePage):
         selected: bool = warehouse_elem.is_selected()
         return selected
 
-    def opt_get_warehouse_ids(self) -> list:
+    def opt_get_warehouse_ids(self) -> list[str]:
         ids: list[str] = []
         container_elem: WebElement = self.driver.find_element(
             By.NAME,
@@ -65,8 +65,8 @@ class Routes(BasePage):
 
 # ============= Rules ============== #
 
-    def get_rules(self) -> list[list]:
-        final_list: list = []
+    def get_rules(self) -> list[list[str]]:
+        final_list: list[list[str]] = []
         table_div: WebElement = self.driver.find_element(
             By.NAME,
             'rule_ids'
@@ -86,7 +86,7 @@ class Routes(BasePage):
             if add_line_row:
                 break
 
-            temp_list: list = []
+            temp_list: list[str] = []
 
             action_elem: WebElement = row.find_element(By.NAME, 'action')
             temp_list.append(action_elem.text)
