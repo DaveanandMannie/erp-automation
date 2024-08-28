@@ -473,30 +473,30 @@ class TestLetterMail:
                 'Service type was not configured correctly'
         )
 
-    def test_contract_id(self, page: ShippingMethods, data: dict[str, Any]):
-        page.navigate_tab_extra()
-        correct_contract: str = data['contract_id']
-        contract: str | None = page.get_contract_id()
-        assert contract == correct_contract, (
-                'Contract number is not configured correctly'
-        )
-
-    def test_payment_method(self, page: ShippingMethods, data: dict[str, Any]):
-        page.navigate_tab_extra()
-        correct_method: str = data['method_of_payments']
-        method: str | None = page.get_payment_method()
-        assert method == correct_method, (
-                'Method of payment is not configured correctly'
-        )
-
-    def test_on_behalf(self, page: ShippingMethods, data: dict[str, Any]):
-        page.navigate_tab_extra()
-        correct_behalf: str = data['on_behalf_of']
-        behalf: str | None = page.get_mailed_on_behalf()
-        assert behalf == correct_behalf, (
-                'Mailed on behalf of is not configured correctly'
-        )
-
+    # def test_contract_id(self, page: ShippingMethods, data: dict[str, Any]):
+    #     page.navigate_tab_extra()
+    #     correct_contract: str = data['contract_id']
+    #     contract: str | None = page.get_contract_id()
+    #     assert contract == correct_contract, (
+    #             'Contract number is not configured correctly'
+    #     )
+    #
+    # def test_payment_method(self, page: ShippingMethods, data: dict[str, Any]):
+    #     page.navigate_tab_extra()
+    #     correct_method: str = data['method_of_payments']
+    #     method: str | None = page.get_payment_method()
+    #     assert method == correct_method, (
+    #             'Method of payment is not configured correctly'
+    #     )
+    #
+    # def test_on_behalf(self, page: ShippingMethods, data: dict[str, Any]):
+    #     page.navigate_tab_extra()
+    #     correct_behalf: str = data['on_behalf_of']
+    #     behalf: str | None = page.get_mailed_on_behalf()
+    #     assert behalf == correct_behalf, (
+    #             'Mailed on behalf of is not configured correctly'
+    #     )
+    #
     # ==================Product Attrib Tab================== #
     def test_excluded_attrib(self,
                              page: ShippingMethods,

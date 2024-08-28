@@ -242,7 +242,7 @@ class TestReceipt:
 
     def test_force_dest(self, page: OperationType, data: dict[str, Any]):
         page.nav_bar_tab()
-        correct_val: str = data['force_all_products']
+        correct_val: str = data['force_destination']
         val: str = str(page.get_force_des_all())
         assert val == correct_val, (
             f'Force a destinion on all products is incorrect: {data['name']}'
