@@ -34,6 +34,8 @@ automated_tests/
 │       ├── package_types.py
 │       ├── test_service_types.py
 │       └── test_shipping_methods.py
+├── static/
+│   ├── *any needed static files
 ├── README.md
 ├── conftest.py
 ├── pyrightconfig.json
