@@ -11,10 +11,12 @@ class BasePage:
     # TODO: decide weather or not to use cookies for auth
     def __init__(self, *args: str):
         _ = load_dotenv()
-        self.chrom_opts = Options()
+        self.chrome_opts = Options()
         for arg in args:
-            self.chrom_opts.add_argument(arg)
-        self.driver = webdriver.Chrome(options=self.chrom_opts)
+            self.chrome_opts.add_argument(arg)
+            if arg == 'headless':
+                self.chrome_opts.add_argument('--window-size=1920x1080')
+        self.driver = webdriver.Chrome(options=self.chrome_opts)
         self.email = os.getenv('EMAIL')
         self.password = os.getenv('PASS')
 
