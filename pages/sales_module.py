@@ -1,5 +1,3 @@
-# TODO: INSTEAD OF RELYING ON AUTO COMPLUTE USE THE LINK TEXT
-
 from time import sleep
 from typing import cast
 
@@ -13,6 +11,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from pages.base import BasePage
 
 
+# TODO: add waits to base class
+# Refact for explict sales order test? Perhaps too granular for this scope
 class SaleOrder(BasePage):
     """This class is used to create mock sales orders"""
     def __init__(self, *args: str):
@@ -26,8 +26,11 @@ class SaleOrder(BasePage):
                            poll: float = 1.0
                            ):
         """
-        A wrapper func for wait -> invisibility of element located
-        Default: (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')
+        Wrapper function for wait.Until EC
+
+        This will throw an error if wait_time is exceed
+        Increase polling rate if element unloads quick
+
         """
         elem: WebElement | bool = WebDriverWait(
             self.driver, wait_time, poll).until(
@@ -40,8 +43,9 @@ class SaleOrder(BasePage):
                          poll: float = 1.0
                          ):
         """
-        A wrapper func for wait -> visibility of element located
-        Default: (By.CLASS_NAME, 'o-autocomplete--dropdown-menu')
+        Wrapper functio for wait.Until except:
+        This will throw an error if wait time is exceed
+        polling rate is set for auto complete change as needed
         """
         elem: WebElement = WebDriverWait(self.driver, wait_time, poll).until(
             EC.visibility_of_element_located(find)
@@ -62,6 +66,7 @@ class SaleOrder(BasePage):
         display: str = f'{price_list} ({currency})'
         input: WebElement = self.driver.find_element(By.ID, 'pricelist_id_0')
         input.click()
+        input.clear()
         input.clear()
         input.send_keys(price_list)
         plist: WebElement = self._wait_visibility((By.LINK_TEXT, display))
@@ -144,7 +149,7 @@ class SaleOrder(BasePage):
 
         _ = self._wait_invisibility(
             find=(By.CLASS_NAME, 'modal'),
-            wait_time=30,
+            wait_time=60,
             poll=0.5
         )
 
@@ -191,7 +196,6 @@ class SaleOrder(BasePage):
             rules_row: WebElement = self.driver.find_element(
                 By.CLASS_NAME, 'o_tree_editor_condition'
             )
-            # _ = self._wait_invisibility(find=rules_row)
 
             input: WebElement = rules_row.find_element(By.TAG_NAME, 'input')
             input.click()
@@ -224,6 +228,10 @@ class SaleOrder(BasePage):
 
             details = cast(list[dict[str, str]], data['details'])
             self._set_details(details)
+
+    def confirm(self):
+        self.driver.find_element(By.NAME, 'action_confirm').click()
+
 
     def create_sale_order(
         self,
