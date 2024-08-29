@@ -9,7 +9,7 @@ class ManifestSettings(BasePage):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
-    def navigate_settings_location(self):
+    def _navigate_settings_location(self):
         settings_tab: WebElement = self.driver.find_element(
             By.CSS_SELECTOR,
             '[data-key="mrp"]'
@@ -18,6 +18,7 @@ class ManifestSettings(BasePage):
         return
 
     def get_manifest_fields(self) -> list[str]:
+        self._navigate_settings_location()
         list_div: WebElement = self.driver.find_element(
             By.NAME,
             'artwork_field_ids'
