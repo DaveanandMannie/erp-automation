@@ -1,57 +1,19 @@
-from time import sleep
 from typing import cast
 
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.base import BasePage
 
 
-# TODO: add waits to base class
-# Refact for explict sales order test? Perhaps too granular for this scope
 class SaleOrder(BasePage):
     """This class is used to create mock sales orders"""
     def __init__(self, *args: str):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
         self.actions: ActionChains = ActionChains(self.driver)
-
-    def _wait_invisibility(self,
-                           find: tuple[str, str] | WebElement = (By.CLASS_NAME, 'o-autocomplete--dropdown-menu'),  # noqa: E501
-                           wait_time: int = 3,
-                           poll: float = 1.0
-                           ):
-        """
-        Wrapper function for wait.Until EC
-
-        This will throw an error if wait_time is exceed
-        Increase polling rate if element unloads quick
-
-        """
-        elem: WebElement | bool = WebDriverWait(
-            self.driver, wait_time, poll).until(
-            EC.invisibility_of_element_located(find)
-        )
-        return elem
-
-    def _wait_visibility(self, find: tuple[str, str] = (By.CLASS_NAME, 'o-autocomplete--dropdown-menu'),  # noqa: E501
-                         wait_time: int = 3,
-                         poll: float = 1.0
-                         ):
-        """
-        Wrapper functio for wait.Until except:
-        This will throw an error if wait time is exceed
-        polling rate is set for auto complete change as needed
-        """
-        elem: WebElement = WebDriverWait(self.driver, wait_time, poll).until(
-            EC.visibility_of_element_located(find)
-        )
-        sleep(0.5)
-        return elem
 
     def _set_customer(self, customer: str):
         "Looks for test client 'Dave Test (PB)'"
@@ -162,7 +124,7 @@ class SaleOrder(BasePage):
         )
         row: WebElement
 
-        # TODO: this is hell
+        # FIX: this is hell
         for index, data in enumerate(products):
             product: str = cast(str, data['ID'])
             row = self._get_row('order_line', index)
@@ -231,7 +193,6 @@ class SaleOrder(BasePage):
 
     def confirm(self):
         self.driver.find_element(By.NAME, 'action_confirm').click()
-
 
     def create_sale_order(
         self,
