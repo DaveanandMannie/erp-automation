@@ -8,8 +8,6 @@ from pages.configs.product_categories import ProductCategory
 from pytest import FixtureRequest
 
 
-# TODO: wait untill Daniel and Rabie finsish with the GL Mapping
-# TODO: decide to decode json
 class TestFinishedProductCategories:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
