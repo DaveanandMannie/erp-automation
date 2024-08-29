@@ -1,40 +1,39 @@
+# pyright: reportAny=false
 from argparse import ArgumentParser
 
 import pytest
 
 
-# TODO: Re do test cases once prod is upgraded to 17
 def main():
     parser: ArgumentParser = ArgumentParser()
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '-c', '--count',
         type=int,
         default=1,
         help='Number of times to repeat the test(default = 1)'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '-e', '--environment',
         choices=['staging', 'production', 'uat'],
         default='staging',
         help='Choose environemnt (default = staging)'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '--tb',
         choices=['auto', 'long', 'short', 'line', 'native', 'no'],
         default='short',
         help='Choose traceback length (default = short)'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '-f', '--file',
         help='Specific test to run (default = None)'
     )
 
-    # TODO: decide if I want to add -w for ease of use
-    parser.add_argument(
+    _ = parser.add_argument(
         '--window',
         nargs='?',
         const='',
@@ -58,7 +57,7 @@ def main():
 
     # this is not best prac
     for _ in range(args.count):
-        pytest.main(pytest_args)
+        _ = pytest.main(pytest_args)
 
 
 if __name__ == '__main__':
