@@ -46,7 +46,7 @@ class TestFinishedProductCategories:
         """Paramitize for multiple json test cases"""
 
         fp: str = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
@@ -198,7 +198,7 @@ class TestRawProductCategories:
         """Paramitize for multiple json test cases"""
 
         fp: str = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
@@ -209,7 +209,7 @@ class TestRawProductCategories:
             if environment == 'uat':
                 page.navigate(cast(str, data['uat_url']))
 
-            sleep(0.5)
+            sleep(1)
             return data
 
     # ============ Tests ============ #
