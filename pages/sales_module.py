@@ -7,8 +7,9 @@ from selenium.webdriver.remote.webelement import WebElement
 
 from pages.base import BasePage
 
-type SaleData =  list[dict[str, str | list[dict[str, str]]]]
+type SaleData = list[dict[str, str | list[dict[str, str]]]]
 type PrintingDetails = list[dict[str, str]]
+
 
 class SaleOrder(BasePage):
     """This class is used to create mock sales orders"""
@@ -64,6 +65,11 @@ class SaleOrder(BasePage):
         input.send_keys(Keys.RETURN)
 
     # ============== setting orderlines ============== #
+    def _get_rows(self, key: str) -> list[WebElement]:
+        table_div: WebElement = self.driver.find_element(By.NAME, key)
+        table: WebElement = table_div.find_element(By.TAG_NAME, 'tbody')
+        rows: list[WebElement] = table.find_elements(By.TAG_NAME, 'tr')
+        return rows
 
     def _get_row(self, key: str, index: int = 0) -> WebElement:
         table_div: WebElement = self.driver.find_element(By.NAME, key)
@@ -196,6 +202,23 @@ class SaleOrder(BasePage):
     def get_title(self) -> str:
         return self.driver.find_element(By.CLASS_NAME, 'oe_title').text
 
+    def get_manufacturing_orders(self) -> list[str]:
+        rows: list[WebElement] = self._get_rows('order_line')
+        mos: list[str] = []
+        for index, row in enumerate(rows):
+            add_line_row: list[WebElement] = row.find_elements(
+                By.CLASS_NAME, 'o_field_x2many_list_row_add'
+            )
+            if add_line_row and index == 0:
+                raise Exception('No Sales order lines')
+            if add_line_row:
+                break
+
+            mo: str = row.find_element(By.NAME, 'manufacturing_order_id').text
+            if mo != '':
+                mos.append(mo)
+        return mos
+
     def create_sale_order(self,
                           products: SaleData,
                           customer: str = 'Dave Test (PB)',
@@ -204,6 +227,7 @@ class SaleOrder(BasePage):
                           service_level: str = 'standard',
                           reciept_id: str = 'Selenium Test',
                           ):
+
         self._set_customer(customer)
         self._set_invoice_address(client)
         self._set_price_list(client, currency)
