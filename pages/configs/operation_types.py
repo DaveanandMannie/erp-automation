@@ -283,3 +283,10 @@ class OperationType(BasePage):
         )
         val: bool = val_elem.is_selected()
         return val
+
+    def get_allow_more_qty(self) -> bool:
+        val_elem: WebElement = self.driver.find_element(
+            By.ID, 'allow_more_qty_0'
+        )
+        val: bool =val_elem.is_selected()
+        return val

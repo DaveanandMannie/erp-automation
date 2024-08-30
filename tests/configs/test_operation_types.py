@@ -40,7 +40,7 @@ class TestReceipt:
     def data(self, request: FixtureRequest, page: OperationType, environment: str) -> dict[str, Any]:  # noqa: E501
         """Paramitize for multiple json test cases"""
         fp: str = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
@@ -248,6 +248,14 @@ class TestReceipt:
             f'Force a destinion on all products is incorrect: {data['name']}'
         )
 
+    def tests_allow_more_qty(self, page: OperationType, data: dict[str, Any]):
+        page.nav_bar_tab()
+        correct_val: str = data['allow_more_qty']
+        val: str = str(page.get_allow_more_qty())
+        assert val == correct_val, (
+                f'Allow more qty is incorrect: {data['name']}'
+        )
+
 
 class TestInternalTransfer:
     @pytest.fixture(scope='class')
@@ -284,7 +292,7 @@ class TestInternalTransfer:
              ) -> dict[str, Any]:
         """Paramitize for multiple json test cases"""
         fp = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
@@ -483,6 +491,14 @@ class TestInternalTransfer:
             f'Force all products to be packed is incorrect: {data['name']}'
         )
 
+    def tests_allow_more_qty(self, page: OperationType, data: dict[str, Any]):
+        page.nav_bar_tab()
+        correct_val: str = data['allow_more_qty']
+        val: str = str(page.get_allow_more_qty())
+        assert val == correct_val, (
+                f'Allow more qty is incorrect: {data['name']}'
+        )
+
 
 class TestDeleivery:
     @pytest.fixture(scope='class')
@@ -519,7 +535,7 @@ class TestDeleivery:
              ) -> dict[str, Any]:
         """Paramitize for multiple json test cases"""
         fp = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
@@ -709,6 +725,14 @@ class TestDeleivery:
             f'Force all products to be packed is incorrect: {data['name']}'
         )
 
+    def tests_allow_more_qty(self, page: OperationType, data: dict[str, Any]):
+        page.nav_bar_tab()
+        correct_val: str = data['allow_more_qty']
+        val: str = str(page.get_allow_more_qty())
+        assert val == correct_val, (
+                f'Allow more qty is incorrect: {data['name']}'
+        )
+
 
 class TestManufacturing:
     @pytest.fixture(scope='class')
@@ -746,7 +770,7 @@ class TestManufacturing:
              ) -> dict[str, Any]:
         """Paramitize for multiple json test cases"""
         fp = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
@@ -898,3 +922,12 @@ class TestManufacturing:
         assert val == correct_val, (
             f'Force dest on all products is incorrect: {data['name']}'
         )
+
+    def tests_allow_more_qty(self, page: OperationType, data: dict[str, Any]):
+        page.nav_bar_tab()
+        correct_val: str = data['allow_more_qty']
+        val: str = str(page.get_allow_more_qty())
+        assert val == correct_val, (
+                f'Allow more qty is incorrect: {data['name']}'
+        )
+
