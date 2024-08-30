@@ -215,7 +215,7 @@ class SaleOrder(BasePage):
                 break
 
             mo: str = row.find_element(By.NAME, 'manufacturing_order_id').text
-            if mo != '':
+            if mo:
                 mos.append(mo)
         return mos
 
