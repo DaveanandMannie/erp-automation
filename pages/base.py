@@ -11,7 +11,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage:
-    # TODO: decide weather or not to use cookies for auth
+    # FIX: decide weather or not to use cookies for auth
     def __init__(self, *args: str):
         _ = load_dotenv()
         self.chrome_opts = Options()

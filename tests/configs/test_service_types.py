@@ -8,7 +8,7 @@ from pages.configs.service_types import ServiceType
 from pytest import FixtureRequest
 
 
-# TODO: decide to decode json
+# FIX: decide to decode json
 class TestServicetypes:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
