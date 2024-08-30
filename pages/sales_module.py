@@ -7,6 +7,8 @@ from selenium.webdriver.remote.webelement import WebElement
 
 from pages.base import BasePage
 
+type SaleData =  list[dict[str, str | list[dict[str, str]]]]
+type PrintingDetails = list[dict[str, str]]
 
 class SaleOrder(BasePage):
     """This class is used to create mock sales orders"""
@@ -22,7 +24,6 @@ class SaleOrder(BasePage):
         cust: WebElement = self._wait_visibility((By.LINK_TEXT, customer))
         cust.click()
 
-    # TODO: this is problematic
     def _set_price_list(self, price_list: str, currency: str):
         "Default price list and address: Canva, Can be set to anohter"
         display: str = f'{price_list} ({currency})'
@@ -70,7 +71,7 @@ class SaleOrder(BasePage):
         rows: list[WebElement] = table.find_elements(By.TAG_NAME, 'tr')
         return rows[index]
 
-    def _set_details(self, details: list[dict[str, str]]):
+    def _set_details(self, details: PrintingDetails):
         """Sets printing details for an order line"""
         def _set_field(element_name: str, value: str):
             input: WebElement = row.find_element(
@@ -115,9 +116,7 @@ class SaleOrder(BasePage):
             poll=0.5
         )
 
-    def _add_products(self,
-                      products: list[dict[str, str | list[dict[str, str]]]]
-                      ):
+    def _add_products(self, products: SaleData):
         """Adds product from a list of products"""
         save_button: WebElement = self.driver.find_element(
             By.CLASS_NAME, 'o_form_button_save'
@@ -188,21 +187,23 @@ class SaleOrder(BasePage):
             row.find_element(By.NAME, 'printing_details').click()
             _ = self._wait_invisibility()
 
-            details = cast(list[dict[str, str]], data['details'])
+            details = cast(PrintingDetails, data['details'])
             self._set_details(details)
 
     def confirm(self):
         self.driver.find_element(By.NAME, 'action_confirm').click()
 
-    def create_sale_order(
-        self,
-        products: list[dict[str, str | list[dict[str, str]]]],
-        customer: str = 'Dave Test (PB)',
-        client: str = 'Canva',
-        currency: str = 'CAD',
-        service_level: str = 'standard',
-        reciept_id: str = 'Selenium Test',
-    ):
+    def get_title(self) -> str:
+        return self.driver.find_element(By.CLASS_NAME, 'oe_title').text
+
+    def create_sale_order(self,
+                          products: SaleData,
+                          customer: str = 'Dave Test (PB)',
+                          client: str = 'Canva',
+                          currency: str = 'CAD',
+                          service_level: str = 'standard',
+                          reciept_id: str = 'Selenium Test',
+                          ):
         self._set_customer(customer)
         self._set_invoice_address(client)
         self._set_price_list(client, currency)
