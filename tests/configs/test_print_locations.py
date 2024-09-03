@@ -1,26 +1,26 @@
+
 import json
 from glob import glob
 from time import sleep
 from typing import Any, cast
 
 import pytest
-from pages.configs.service_types import ServiceType
+from pages.configs.print_locations import PrintLocations
 from pytest import FixtureRequest
 
 
-# FIX: decide to decode json
-class TestServicetypes:
+class TestPrintingLocations:
     @pytest.fixture(scope='class')
-    def page(self, request: FixtureRequest):
+    def page(self, request: FixtureRequest) -> PrintLocations:
         """ Selenium driver with scraper """
         environment: str = request.config.getoption('--environment')  # pyright: ignore[reportAssignmentType]  # noqa: E501
         driver_arg: str = request.config.getoption('--window')  # pyright: ignore[reportAssignmentType]  # noqa: E501
-        page: ServiceType
+        page: PrintLocations
 
         if driver_arg:
-            page = ServiceType(driver_arg)
+            page = PrintLocations(driver_arg)
         else:
-            page = ServiceType()
+            page = PrintLocations()
 
         if environment == 'staging':
             page.login_staging()
@@ -30,20 +30,21 @@ class TestServicetypes:
 
         if environment == 'uat':
             page.login_uat()
+
         return page
 
     @pytest.fixture(
         scope='class',
-        params=glob('testcases_json/configs/service_types/odoo_17/*.json')
+        params=glob('testcases_json/configs/print_locations/*.json')
     )
     def data(self,
              request: FixtureRequest,
-             page: ServiceType,
+             page: PrintLocations,
              environment: str
              ) -> dict[str, Any]:
         """Paramitize for multiple json test cases"""
         fp: str = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
@@ -59,7 +60,7 @@ class TestServicetypes:
 
     # ============= Tests ============= #
 
-    def test_entire_page(self, page: ServiceType, data: dict[str, Any]):
-        correct_val: list[list[str]] = data['struct']
-        val: list[list[str]] = page.get_service_struct()
-        assert val == correct_val, '1 or more service types are incorrect'
+    def test_location_struct(self, page: PrintLocations, data: dict[str, Any]):
+        correct_val: list[list[str]] = data['location_struct']
+        val: list[list[str]] = page.get_locations()
+        assert val == correct_val, 'One or more print locations are incorrect'

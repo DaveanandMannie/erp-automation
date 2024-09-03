@@ -1,3 +1,4 @@
+# pyright: reportAny=false
 from argparse import ArgumentParser
 
 import pytest
@@ -6,38 +7,48 @@ import pytest
 def main():
     parser: ArgumentParser = ArgumentParser()
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '-c', '--count',
         type=int,
         default=1,
-        help='Number of times to repeat the test(default = 1)'
+        help=' Number of times to repeat the test(default = 1)'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '-e', '--environment',
-        choices=['staging', 'production'],
+        choices=['staging', 'production', 'uat'],
         default='staging',
-        help='Choose environemnt (default = staging)'
+        help=' Choose environemnt (default = staging)'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '--tb',
         choices=['auto', 'long', 'short', 'line', 'native', 'no'],
         default='short',
-        help='Choose traceback length (default = short)'
+        help=' Choose traceback length (default = short)'
     )
 
-    parser.add_argument(
+    _ = parser.add_argument(
         '-f', '--file',
-        help='Specific test to run (default = None)'
+        help=' Specific test to run (default = None)'
     )
 
-    # TODO: decide if I want to add -w for ease of use
-    parser.add_argument(
+    _ = parser.add_argument(
         '--window',
         nargs='?',
         const='',
-        help='Choose to show driver opts (default = headless)'
+        help=' Choose to show driver opts (default = headless)'
+    )
+
+    _ = parser.add_argument(
+        '-v',
+        action='store_true',
+        help=' Verbosity level 1 (default = none)',
+    )
+    _ = parser.add_argument(
+        '-vv',
+        help=' Verbosity level 2 (default = none)',
+        action='store_true',
     )
 
     args = parser.parse_args()
@@ -55,9 +66,14 @@ def main():
     if args.window is not None:
         pytest_args.append(f'--window={args.window}')
 
+    if args.v:
+        pytest_args.append('-v')
+    elif args.vv:
+        pytest_args.append('-vv')
+
     # this is not best prac
     for _ in range(args.count):
-        pytest.main(pytest_args)
+        _ = pytest.main(pytest_args)
 
 
 if __name__ == '__main__':

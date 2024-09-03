@@ -1,16 +1,17 @@
-from selenium.webdriver.remote.webelement import WebElement
-from pages.base import BasePage
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+
+from pages.base import BasePage
 
 
 class Routes(BasePage):
-    def __init__(self, *args):
+    def __init__(self, *args: str):
         super().__init__(*args)
         self.driver.implicitly_wait(5)
 
-    def get_name(self) -> str:
-        name_elem: WebElement = self.driver.find_element(By.ID, 'name')
-        name: str = name_elem.get_attribute('value')  # type: ignore
+    def get_name(self) -> str | None:
+        name_elem: WebElement = self.driver.find_element(By.ID, 'name_0')
+        name: str | None = name_elem.get_attribute('value')
         return name
 
 # ============= applicable on ============== #
@@ -18,7 +19,7 @@ class Routes(BasePage):
     def get_product_category_bool(self) -> bool:
         cat_elem: WebElement = self.driver.find_element(
             By.ID,
-            'product_categ_selectable'
+            'product_categ_selectable_0'
         )
         selected: bool = cat_elem.is_selected()
         return selected
@@ -26,7 +27,7 @@ class Routes(BasePage):
     def get_products_bool(self) -> bool:
         prods_elem: WebElement = self.driver.find_element(
             By.ID,
-            'product_selectable'
+            'product_selectable_0'
         )
         selected: bool = prods_elem.is_selected()
         return selected
@@ -34,12 +35,12 @@ class Routes(BasePage):
     def get_warehouses_bool(self) -> bool:
         warehouse_elem: WebElement = self.driver.find_element(
             By.ID,
-            'warehouse_selectable'
+            'warehouse_selectable_0'
         )
         selected: bool = warehouse_elem.is_selected()
         return selected
 
-    def opt_get_warehouse_ids(self) -> list:
+    def opt_get_warehouse_ids(self) -> list[str]:
         ids: list[str] = []
         container_elem: WebElement = self.driver.find_element(
             By.NAME,
@@ -50,22 +51,22 @@ class Routes(BasePage):
             'span'
         )
         for span in spans:
-            print(span.text)
-            ids.append(span.text)
+            if span.text != '':
+                ids.append(span.text)
         return ids
 
     def get_sales_lines_bool(self) -> bool:
         sales_elem: WebElement = self.driver.find_element(
             By.ID,
-            'sale_selectable'
+            'sale_selectable_0'
         )
         selected: bool = sales_elem.is_selected()
         return selected
 
 # ============= Rules ============== #
 
-    def get_rules(self) -> list[list]:
-        final_list: list = []
+    def get_rules(self) -> list[list[str]]:
+        final_list: list[list[str]] = []
         table_div: WebElement = self.driver.find_element(
             By.NAME,
             'rule_ids'
@@ -85,7 +86,7 @@ class Routes(BasePage):
             if add_line_row:
                 break
 
-            temp_list: list = []
+            temp_list: list[str] = []
 
             action_elem: WebElement = row.find_element(By.NAME, 'action')
             temp_list.append(action_elem.text)

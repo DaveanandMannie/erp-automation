@@ -8,30 +8,37 @@ end user behaviour is as expected.
 automated_tests/
 ├── .venv
 ├── json_skeletons/
-│   └── *json templates
+│   └── configs/
+│       └── *json templates
 ├── pages/
 │   ├── base.py
-│   ├── product_cateogory.py
-│   ├── service_types.py
-│   ├── routes.py
-│   ├── rules.py
-│   ├── package_types.py
-│   ├── artworkmanifest.py
-│   └── shipping_methods.py
+│   └── configs/
+│       ├── product_cateogory.py
+│       ├── service_types.py
+│       ├── routes.py
+│       ├── rules.py
+│       ├── package_types.py
+│       ├── artworkmanifest.py
+│       └── shipping_methods.py
 ├── testcases_json/
 │   └── configs/
-│       └── *live json test data
+│       └── specific dirs/
+│           └── *json data
 ├── tests/
 │   └── configs/
 │       ├── test_artwork_manifest.py
 │       ├── test_product_categories.py
 │       ├── test_routes.py
+│       ├── test_operation_types.py
 │       ├── test_rules.py
 │       ├── package_types.py
 │       ├── test_service_types.py
 │       └── test_shipping_methods.py
+├── static/
+│   └── *any needed static files
 ├── README.md
 ├── conftest.py
+├── pyrightconfig.json
 ├── run_tests.py
 └── requirements.txt
 ```
@@ -47,7 +54,7 @@ Use ```--tb <length of trace back>``` to adjust the trace back length. All Pytes
 
 Use ```--count <int>``` or ```-c <int>``` To run the test multiple times
 
-Use ```--environment <staging or production>```  or ```-e <staging or production>``` To choose which instance to test on
+Use ```--environment <staging or production or uat>```  or ```-e <staging or production or uat>``` To choose which instance to test on
 
 Use ```--file <test script path>``` or ```-f <test script path>``` To run a specific tests script
 
