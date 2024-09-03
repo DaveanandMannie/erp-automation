@@ -43,7 +43,7 @@ class TestPackageTypes:
         """Paramitize for multiple json test cases"""
 
         fp: str = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
 
             if environment == 'staging':
@@ -59,16 +59,6 @@ class TestPackageTypes:
             return data
     # ============= Tests ============= #
 
-<<<<<<< HEAD
-    def test_name(self, page: PackageTypes, data: dict):
-        correct_val: str = data['name']
-        val: str = page.get_name()
-        assert val == correct_val, 'Name is not configured correclty'
-
-    def test_dimensions(self, page: PackageTypes, data: dict):
-        correct_val: list = data['dimensions']
-        val: list = page.get_dimensions()
-=======
     def test_name(self, page: PackageTypes, data: dict[str, Any]):
         correct_val: str = data['name']
         val: str | None = page.get_name()
@@ -77,83 +67,45 @@ class TestPackageTypes:
     def test_dimensions(self, page: PackageTypes, data: dict[str, Any]):
         correct_val: list[str] = data['dimensions']
         val: list[str | None] = page.get_dimensions()
->>>>>>> odoo_17
         assert val == correct_val, (
             f'Dimensions is not configured correctly for :{data['name']}'
         )
 
-<<<<<<< HEAD
-    def test_weight(self, page: PackageTypes, data: dict):
-        correct_val: str = data['weight']
-        val: str = page.get_weight()
-=======
     def test_weight(self, page: PackageTypes, data: dict[str, Any]):
         correct_val: str = data['weight']
         val: str | None = page.get_weight()
->>>>>>> odoo_17
         assert val == correct_val, (
             f'Weight is not configured correctly for: {data['name']}'
         )
 
-<<<<<<< HEAD
-    def test_max_weight(self, page: PackageTypes, data: dict):
-        correct_val: str = data['max_weight']
-        val: str = page.get_max_weight()
-=======
     def test_max_weight(self, page: PackageTypes, data: dict[str, Any]):
         correct_val: str = data['max_weight']
         val: str | None = page.get_max_weight()
->>>>>>> odoo_17
         assert val == correct_val, (
             f'Max weight is not configured correctly for: {data['name']}'
         )
 
-<<<<<<< HEAD
-    def test_barcode(self, page: PackageTypes, data: dict):
-        correct_val: str = data['barcode']
-        val: str = page.get_barcode()
-=======
     def test_barcode(self, page: PackageTypes, data: dict[str, Any]):
         correct_val: str = data['barcode']
         val: str | None = page.get_barcode()
->>>>>>> odoo_17
         assert val == correct_val, (
             f'Barcode is not configured correctly for: {data['name']}'
         )
 
-<<<<<<< HEAD
-    def test_price(self, page: PackageTypes, data: dict):
-        correct_val: str = data['price']
-        val: str = page.get_price()
-=======
     def test_price(self, page: PackageTypes, data: dict[str, Any]):
         correct_val: str = data['price']
         val: str | None = page.get_price()
->>>>>>> odoo_17
         assert val == correct_val, (
             f'Price is not configured correctly for: {data['name']}'
         )
 
-<<<<<<< HEAD
-    def test_clients(self, page: PackageTypes, data: dict):
-=======
     def test_clients(self, page: PackageTypes, data: dict[str, Any]):
->>>>>>> odoo_17
         correct_val: str = data['related_to_client']
         val: str = str(page.get_related_to_client())
         assert val == correct_val, (
             f'Related to client is not toggled correctly for: {data['name']}'
         )
         if val == 'True':
-<<<<<<< HEAD
-            correct_vals: list = data['companies']
-            vals: list = page.opt_get_companies()
-            assert vals == correct_vals, f'List of companies is not configured correctly for: {data['name']}'  # noqa: E501
-
-    def test_product(self, page: PackageTypes, data: dict):
-        correct_val: str = data['product']
-        val: str = page.get_product()
-=======
             correct_vals: list[str] = data['companies']
             vals: list[str] = page.opt_get_companies()
             assert vals == correct_vals, f'List of companies is not configured correctly for: {data['name']}'  # noqa: E501
@@ -161,20 +113,13 @@ class TestPackageTypes:
     def test_product(self, page: PackageTypes, data: dict[str, Any]):
         correct_val: str = data['product']
         val: str | None = page.get_product()
->>>>>>> odoo_17
         assert val == correct_val, (
             f'Product is not configured correctly for: {data['name']}'
         )
 
-<<<<<<< HEAD
-    def test_package_rules(self, page: PackageTypes, data: dict):
-        correct_val: list = data['package_rules']
-        val: list = page.get_package_rules()
-=======
     def test_package_rules(self, page: PackageTypes, data: dict[str, Any]):
         correct_val: list[list[str]] = data['package_rules']
         val: list[list[str]] = page.get_package_rules()
->>>>>>> odoo_17
         assert val == correct_val, (
             f'Package rules is not configured correctly for: {data['name']}'
         )
