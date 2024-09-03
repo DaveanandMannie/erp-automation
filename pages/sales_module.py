@@ -197,7 +197,7 @@ class SaleOrder(BasePage):
             self._set_details(details)
 
     def confirm(self) -> str:
-        """Clicks the save button on an edited SO"""
+        """Clicks the save button on an edited SO and returns SO number"""
         self.driver.find_element(By.NAME, 'action_confirm').click()
         return self.get_title()
 
