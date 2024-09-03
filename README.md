@@ -13,12 +13,14 @@ automated_tests/
 ├── pages/
 │   ├── base.py
 │   └── configs/
-│       ├── product_cateogory.py
-│       ├── service_types.py
+│       ├── artworkmanifest.py
+│       ├── operation_types.py
+│       ├── package_types.py
+│       ├── print_locations.py
+│       ├── product_categories.py
 │       ├── routes.py
 │       ├── rules.py
-│       ├── package_types.py
-│       ├── artworkmanifest.py
+│       ├── service_types.py
 │       └── shipping_methods.py
 ├── testcases_json/
 │   └── configs/
@@ -27,11 +29,12 @@ automated_tests/
 ├── tests/
 │   └── configs/
 │       ├── test_artwork_manifest.py
+│       ├── test_operation_types.py
+│       ├── test_package_types.py
+│       ├── test_print_locations.py
 │       ├── test_product_categories.py
 │       ├── test_routes.py
-│       ├── test_operation_types.py
 │       ├── test_rules.py
-│       ├── package_types.py
 │       ├── test_service_types.py
 │       └── test_shipping_methods.py
 ├── static/
