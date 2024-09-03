@@ -196,9 +196,10 @@ class SaleOrder(BasePage):
             details = cast(PrintingDetails, data['details'])
             self._set_details(details)
 
-    def confirm(self):
+    def confirm(self) -> str:
         """Clicks the save button on an edited SO"""
         self.driver.find_element(By.NAME, 'action_confirm').click()
+        return self.get_title()
 
     def get_title(self) -> str:
         """Returns the SO number if the driver is on a saved SO"""
