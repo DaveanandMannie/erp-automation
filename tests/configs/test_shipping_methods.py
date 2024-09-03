@@ -61,6 +61,7 @@ class TestParcel:
     # ============= Tests ============= #
 
     def test_name(self, page: ShippingMethods, data: dict[str, Any]):
+        sleep(0.2)
         correct_name: str = data['shipping_method_name']
         name = page.get_name()
         assert name == correct_name, (
