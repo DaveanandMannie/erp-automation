@@ -197,12 +197,15 @@ class SaleOrder(BasePage):
             self._set_details(details)
 
     def confirm(self):
+        """Clicks the save button on an edited SO"""
         self.driver.find_element(By.NAME, 'action_confirm').click()
 
     def get_title(self) -> str:
+        """Returns the SO number if the driver is on a saved SO"""
         return self.driver.find_element(By.CLASS_NAME, 'oe_title').text
 
     def get_manufacturing_orders(self) -> list[str]:
+        "Retruns MO IDs in a SO from a SO page"
         rows: list[WebElement] = self._get_rows('order_line')
         mos: list[str] = []
         for index, row in enumerate(rows):
