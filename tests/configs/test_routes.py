@@ -57,6 +57,7 @@ class TestProductCategories:
 # ========== tests ========== #
 
     def test_name(self, page: Routes, data: dict[str, Any]):
+        sleep(0.2)
         correct_val: str = data['name']
         val: str | None = page.get_name()
         assert val == correct_val, (
