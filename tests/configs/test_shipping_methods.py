@@ -286,17 +286,17 @@ class TestParcel:
         assert password == correct_pass, (
             'Canada Post production password is not configured correctly'
         )
-# FIXME: Uncomment once product attrib input is visable on page
-    # def test_excluded_attrib(self,
-    #                          page: ShippingMethods,
-    #                          data: dict[str, Any]
-    #                          ):
-    #     page.navigate_tab_product_attrib()
-    #     correct_exclude: list[str] = data['excluded_attributes']
-    #     exclude: list[str] = page.get_excluded_attribs()
-    #     assert exclude == correct_exclude, (
-    #             'Excluded attributes are not configured correctly'
-    #     )
+
+    def test_excluded_attrib(self,
+                             page: ShippingMethods,
+                             data: dict[str, Any]
+                             ):
+        page.navigate_tab_product_attrib()
+        correct_exclude: list[str] = data['excluded_attributes']
+        exclude: list[str] = page.get_excluded_attribs()
+        assert exclude == correct_exclude, (
+                'Excluded attributes are not configured correctly'
+        )
 
 
 class TestLetterMail:
@@ -474,6 +474,7 @@ class TestLetterMail:
                 'Service type was not configured correctly'
         )
     # ==================Product Attrib Tab================== #
+
     def test_excluded_attrib(self,
                              page: ShippingMethods,
                              data: dict[str, Any]
