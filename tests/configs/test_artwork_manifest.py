@@ -4,9 +4,8 @@ from time import sleep
 from typing import Any, cast
 
 import pytest
-from pytest import FixtureRequest
-
 from pages.configs.artworkmanifest import ManifestSettings
+from pytest import FixtureRequest
 
 
 class TestArtworkManifestSettings:
@@ -60,11 +59,7 @@ class TestArtworkManifestSettings:
     def test_manifest_settings(self,
                                page: ManifestSettings,
                                data: dict[str, Any],
-                               environment: str,
                                ):
-# FIXME: remove once my privilages are updated
-        if environment != 'production':
-            pytest.skip('waiting on prod refresh')
         correct_settings: list[str] = data['settings']
         settings: list[str] = page.get_manifest_fields()
         assert settings == correct_settings, (
