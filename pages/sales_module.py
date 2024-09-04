@@ -18,6 +18,8 @@ class SaleOrder(BasePage):
         self.driver.implicitly_wait(5)
         self.actions: ActionChains = ActionChains(self.driver)
 
+    # ============= SALES ORDER PAGE ============= #
+
     def _set_customer(self, customer: str):
         "Looks for test client 'Dave Test (PB)'"
         input: WebElement = self.driver.find_element(By.ID, 'partner_id_0')
@@ -238,3 +240,6 @@ class SaleOrder(BasePage):
         self._set_service_lvl(service_level)
         self._set_receipt(reciept_id)
         self._add_products(products)
+
+# TODO: add statefull testing for moving an item all the way to shipping
+# stepwise func??
