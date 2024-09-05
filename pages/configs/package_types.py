@@ -96,25 +96,10 @@ class PackageTypes(BasePage):
         return related
 
     def opt_get_companies(self) -> list[str]:
-        company_list: list[str] = []
         table_div: WebElement = self.driver.find_element(
-            By.NAME,
-            'client_company_ids'
+            By.NAME, 'client_company_ids'
         )
-        table_elem: WebElement = table_div.find_element(By.TAG_NAME, 'tbody')
-        rows: list[WebElement] = table_elem.find_elements(By.TAG_NAME, 'tr')
-        for row in rows:
-            add_line_row: list[WebElement] = row.find_elements(
-                By.CLASS_NAME,
-                'o_field_x2many_list_row_add'
-            )
-
-            if add_line_row:
-                break
-
-            name_elem: WebElement = row.find_element(By.TAG_NAME, 'td')
-            company_list.append(name_elem.text)
-
+        company_list: list[str] = table_div.text.split('\n')[1:-1]
         return company_list
 
     def get_package_rules(self) -> list[list[str]]:
