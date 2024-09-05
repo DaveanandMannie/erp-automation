@@ -42,7 +42,7 @@ class TestRules:
              environment: str) -> dict[str, Any]:
         """Paramitize for multiple json test cases"""
         fp: str = cast(str, request.param)
-        with open(fp, 'r', encoding='utf-8') as file:
+        with open(fp, encoding='utf-8') as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
