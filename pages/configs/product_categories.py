@@ -62,6 +62,12 @@ class ProductCategory(BasePage):
         binning: bool = binning_elem.is_selected()
         return binning
 
+    def opt_allow_binning_label(self) -> bool:
+        binning_elem: WebElement = self.driver.find_element(
+            By.ID, 'is_download_binning_required_0'
+        )
+        return binning_elem.is_selected()
+
     def get_bin_by(self) -> str:
         by_el: WebElement = self.driver.find_element(By.ID, 'product_bin_by_0')
         by_option = Select(by_el).first_selected_option

@@ -111,6 +111,12 @@ class TestFinishedProductCategories:
         correct_val: str = data['required_binning']
         val: str = str(page.get_require_binning())
         assert val == correct_val, f'Incorrect Require binning:{data['name']}'
+        if correct_val == 'True':
+            cor_val: str = data['allow_binning_label']
+            o_val: str = str(page.opt_allow_binning_label())
+            assert o_val == cor_val, (
+                    f'allow bin label is incorrect: {data['name']}'
+            )
 
     def test_bin_by(self, page: ProductCategory, data: dict[str, Any]):
         correct_val: str = data['product_bin_by']

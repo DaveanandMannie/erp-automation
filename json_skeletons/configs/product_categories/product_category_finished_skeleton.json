@@ -9,6 +9,7 @@
     "requried_profile": "",
     "required_batching": "",
     "required_binning": "",
+    "allow_binning_label": "",
     "product_bin_by": "",
     "routes": [""],
     "total_routes":[""],
