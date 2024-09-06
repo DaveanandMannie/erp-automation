@@ -153,8 +153,6 @@ class ShippingMethods(BasePage):
         return company_names
 
 # =============== Destination Availability=============== #
-    # TODO: I feel like this will run faster the element list check
-    # other page classes and perf test
     def get_countries(self) -> list[str]:
         country_badges: WebElement = self.driver.find_element(
             By.NAME,
@@ -303,8 +301,6 @@ class ShippingMethods(BasePage):
         return behalf
 
 # =============== Include / exclude  tab =============== #
-    # TODO: I feel like this will run faster the element list check
-    # other page classes and perf test
     def get_excluded_attribs(self) -> list[str]:
         excluded_attributes_spans = self.driver.find_element(
             By.NAME, 'excluded_attribute_ids'  # TODO: re-eval after viveks changes  # noqa: E501

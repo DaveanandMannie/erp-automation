@@ -8,7 +8,7 @@ from pages.configs.operation_types import OperationType
 from pytest import FixtureRequest
 
 
-# TODO: decide weather to abstract out a base test class
+# FIXME: decide weather to abstract out a base test class
 class TestReceipt:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
