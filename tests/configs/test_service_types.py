@@ -8,7 +8,6 @@ from pages.configs.service_types import ServiceType
 from pytest import FixtureRequest
 
 
-# FIX: decide to decode json
 class TestServicetypes:
     @pytest.fixture(scope='class')
     def page(self, request: FixtureRequest):
@@ -43,7 +42,7 @@ class TestServicetypes:
              ) -> dict[str, Any]:
         """Paramitize for multiple json test cases"""
         fp: str = cast(str, request.param)
-        with open(fp, 'r') as file:
+        with open(fp) as file:
             data: dict[str, Any] = json.load(file)
             if environment == 'staging':
                 page.navigate(cast(str, data['staging_url']))
